@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101214">
+<meta name="description" content="SEO, INTELLIGENCE — an AI-powered search and SEO intelligence platform. One layer for performance, competitor gaps, keyword opportunities, and AI search visibility.">
+<title>SEO, INTELLIGENCE — See what search can't show you</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101214'/%3E%3Cpath d='M6 25h20M8.5 22.5 16 8l7.5 14.5' fill='none' stroke='%23F3F0E8' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='8' r='2.1' fill='%23C7F36B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<script>
+  if (location.hash.startsWith('#/') && location.hash !== '#/' && location.hash !== '#/landing') {
+    document.documentElement.classList.add('boot-app');
+  }
+</script>
+<style>
+  :root {
+    --bg: #101214;
+    --surface: #171A1D;
+    --card: #1D2125;
+    --lime: #C7F36B;
+    --ivory: #F3F0E8;
+    --steel: #78838C;
+    --muted: rgba(243, 240, 232, 0.70);
+    --line: rgba(243, 240, 232, 0.10);
+    --line-strong: rgba(243, 240, 232, 0.18);
+    --clay: #D4A394;
+    --sand: #C7B48A;
+    --sans: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ivory); }
+  body {
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ivory);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--lime); color: var(--bg); }
+  :focus-visible { outline: 1px solid var(--lime); outline-offset: 3px; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  a { color: inherit; }
+  img { max-width: 100%; }
+  .vh {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin: 0 0 10px;
+  }
+  h1, h2, h3, .wordmark, .score-num, .metric-value, .impact {
+    font-family: var(--sans);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+  }
+  h1 { margin: 0; }
+  h2 { font-size: clamp(1.7rem, 3vw, 2.45rem); line-height: 1.05; margin: 0; letter-spacing: -0.04em; }
+  h3 { font-size: 1.15rem; margin: 0 0 8px; letter-spacing: -0.03em; }
+  p { margin: 0; }
+  .muted { color: var(--muted); }
+  .steel { color: var(--steel); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  .mark { width: 28px; height: 28px; display: block; flex: 0 0 auto; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ivory); }
+  .wordmark {
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .wordmark .comma { color: var(--lime); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: 1px solid transparent; background: var(--lime); color: var(--bg);
+    padding: 12px 16px; border-radius: 2px; text-decoration: none; cursor: pointer;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+  }
+  .btn:hover { background: #d6f68c; }
+  .btn.ghost { background: transparent; color: var(--ivory); border-color: rgba(243,240,232,0.28); }
+  .btn.ghost:hover { border-color: var(--lime); color: var(--lime); background: transparent; }
+  .btn.small { padding: 8px 10px; font-size: 10px; }
+  .btn:disabled { opacity: 0.55; cursor: progress; }
+  .link {
+    color: var(--lime); text-decoration: none;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Landing */
+  .lnav {
+    position: sticky; top: 0; z-index: 8;
+    background: var(--bg);
+    border-bottom: 1px solid transparent;
+  }
+  .lnav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; }
+  .lnav-actions { display: flex; align-items: center; gap: 18px; }
+  .project-chip { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); }
+  .lhero-bleed {
+    background-image:
+      linear-gradient(rgba(243,240,232,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(243,240,232,0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    background-position: center top;
+    border-bottom: 1px solid var(--line);
+  }
+  .lhero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 36px;
+    align-items: end;
+    padding: 64px 0 36px;
+    min-height: calc(100vh - 168px);
+  }
+  .lhero h1 {
+    font-size: clamp(3.1rem, 6.4vw, 5.7rem);
+    line-height: 0.9;
+    letter-spacing: -0.048em;
+    text-transform: uppercase;
+    max-width: 11ch;
+  }
+  .lhero h1 .per { color: var(--lime); }
+  .lede { margin-top: 22px; max-width: 42ch; font-size: 17px; color: var(--muted); }
+  .coords { margin: 22px 0 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .imap { position: relative; aspect-ratio: 640 / 500; width: 100%; }
+  .imap svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .edge line { stroke: var(--steel); stroke-width: 1; }
+  .edge.dashed line { stroke-dasharray: 2 5; }
+  .imap.is-hot .edge { opacity: 0.12; }
+  .imap.is-hot .edge.hot { opacity: 1; }
+  .imap.is-hot .edge.hot line { stroke: var(--lime); }
+  .dot {
+    position: absolute; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--ivory); transform: translate(-50%, -50%); pointer-events: none;
+  }
+  .dot.subject, .dot.opp { width: 12px; height: 12px; background: var(--lime); }
+  .dot.minor { width: 7px; height: 7px; background: var(--steel); }
+  .dot.hot { background: var(--lime); }
+  .mlabel {
+    position: absolute; background: transparent; border: 0; color: var(--ivory);
+    font-family: var(--sans); font-size: 13.5px; letter-spacing: -0.02em; padding: 0;
+    transform: translate(-50%, 12px); white-space: nowrap;
+  }
+  .mlabel.above { transform: translate(-50%, -28px); }
+  .mlabel.right { transform: translate(12px, -50%); }
+  .mlabel.minor { color: var(--steel); font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .mlabel.hot { color: var(--lime); }
+  .map-readout { min-height: 4.6em; margin: 8px 0 0; max-width: 48ch; color: var(--muted); font-size: 14px; }
+  .strip { border-bottom: 1px solid var(--line); background: var(--bg); }
+  .strip-inner {
+    display: grid;
+    grid-template-columns: 1.3fr repeat(4, 1fr);
+    gap: 12px;
+    padding: 16px 0;
+    align-items: center;
+  }
+  .strip-live { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
+  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); display: inline-block; }
+  .strip-item span { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); }
+  .strip-item strong { display: block; margin-top: 4px; font-family: var(--sans); font-size: 1.45rem; font-weight: 500; letter-spacing: -0.04em; }
+  .strip-item em { font-style: normal; color: var(--lime); font-family: var(--mono); font-size: 11px; margin-left: 6px; }
+  .method { display: grid; grid-template-columns: 0.72fr 1.28fr; gap: 48px; padding: 88px 0; }
+  .method h2 { font-size: clamp(2.2rem, 4vw, 3.4rem); max-width: 10ch; }
+  .method ol { list-style: none; margin: 0; padding: 0; }
+  .method li { display: grid; grid-template-columns: 52px 1fr; gap: 12px; padding: 20px 0; border-top: 1px solid var(--line); }
+  .method li b { font-family: var(--sans); font-weight: 500; font-size: 1.15rem; letter-spacing: -0.03em; display: block; margin-bottom: 4px; }
+  .method li p { color: var(--muted); max-width: 52ch; }
+  .method .idx { font-family: var(--mono); color: var(--lime); font-size: 12px; padding-top: 4px; }
+  .lfoot { border-top: 1px solid var(--line); padding: 28px 0 40px; }
+  .foot-grid { display: flex; justify-content: space-between; gap: 24px; align-items: end; flex-wrap: wrap; }
+  .lfoot p { color: var(--steel); font-size: 13px; max-width: 46ch; }
+  .motto { font-family: var(--mono); letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; color: var(--ivory); }
+
+  /* App shell */
+  #view-app { display: none; height: 100vh; grid-template-columns: 232px 1fr; }
+  body.app-mode { height: 100vh; overflow: hidden; }
+  body.app-mode #view-landing, html.boot-app #view-landing { display: none; }
+  body.app-mode #view-app, html.boot-app #view-app {
+    display: grid; height: 100vh; grid-template-columns: 232px 1fr;
+  }
+  html.boot-app, html.boot-app body { height: 100%; overflow: hidden; }
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--line);
+    display: flex; flex-direction: column;
+    min-height: 0; height: 100vh;
+    padding: 18px 12px 14px;
+  }
+  .side-brand { display: flex; align-items: center; justify-content: space-between; padding: 0 8px 16px; }
+  .side-close { display: none; }
+  .side-project {
+    margin: 0 8px 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line);
+    text-decoration: none; display: block;
+  }
+  .side-project strong { display: block; font-weight: 500; font-size: 14px; margin-top: 4px; }
+  .nav { display: flex; flex-direction: column; gap: 2px; overflow: auto; flex: 1; }
+  .nav-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--steel); padding: 14px 10px 6px;
+  }
+  .nav a {
+    display: flex; align-items: center; gap: 8px;
+    text-decoration: none; color: var(--steel);
+    padding: 7px 10px; font-size: 13.5px; border-left: 2px solid transparent;
+  }
+  .nav a:hover { color: var(--ivory); background: rgba(243,240,232,0.03); }
+  .nav a.active { color: var(--ivory); border-left-color: var(--lime); background: rgba(199,243,107,0.04); }
+  .nav .idx { font-family: var(--mono); font-size: 10px; width: 1.6em; color: var(--steel); }
+  .nav a.active .idx { color: var(--lime); }
+  .badge {
+    margin-left: auto; background: var(--lime); color: var(--bg);
+    font-family: var(--mono); font-size: 10px; padding: 1px 5px; border-radius: 2px;
+  }
+  .badge[hidden] { display: none !important; }
+  .side-foot { padding: 10px 8px 0; border-top: 1px solid var(--line); margin-top: 8px; }
+  .side-foot a { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); text-decoration: none; }
+  .side-foot a:hover { color: var(--lime); }
+  .main { height: 100vh; overflow: auto; background: var(--bg); }
+  .topbar {
+    position: sticky; top: 0; z-index: 6;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 12px 28px; background: var(--bg); border-bottom: 1px solid var(--line);
+  }
+  .top-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .menu-btn { display: none; }
+  .top-title { font-family: var(--sans); font-size: 1.05rem; letter-spacing: -0.03em; }
+  .top-meta { display: flex; align-items: center; gap: 22px; }
+  .top-meta div span { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); }
+  .top-meta div b { font-weight: 500; font-size: 13px; }
+  .demo-flag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--steel); border: 1px solid var(--line); padding: 5px 7px; white-space: nowrap;
+  }
+  .main-pad { padding: 8px 32px 72px; }
+  .panel { display: none; }
+  .panel.active { display: block; animation: rise 380ms ease; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .hero-app {
+    display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.75fr);
+    gap: 28px; align-items: end; padding: 32px 0 26px; border-bottom: 1px solid var(--line);
+  }
+  .hero-app .sub { margin-top: 14px; max-width: 46ch; color: var(--muted); font-size: 16px; }
+  .hero-actions { display: flex; gap: 16px; margin-top: 22px; flex-wrap: wrap; }
+  .score-block { padding-bottom: 4px; }
+  .score-arc { width: min(100%, 280px); display: block; margin-left: auto; }
+  .arc-fill { stroke-dasharray: 82 100; stroke-dashoffset: 82; animation: draw 1.3s ease forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .score-row { display: flex; align-items: flex-end; justify-content: flex-end; gap: 8px; margin-top: -8px; }
+  .score-num { font-size: clamp(4.2rem, 7vw, 6rem); line-height: 0.85; letter-spacing: -0.06em; }
+  .score-num small { font-size: 1rem; letter-spacing: 0; color: var(--steel); margin-left: 4px; font-family: var(--mono); }
+  .score-label { text-align: right; font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime); margin-top: 8px; }
+  .confidence { text-align: right; color: var(--steel); font-size: 12px; margin-top: 8px; }
+  .pillars { list-style: none; margin: 18px 0 0; padding: 0; }
+  .pillars li { display: grid; grid-template-columns: 92px 1fr 28px; gap: 8px; align-items: center; margin: 7px 0; font-size: 12px; color: var(--muted); }
+  .pillars b { font-weight: 500; color: var(--ivory); font-family: var(--mono); font-size: 11px; text-align: right; }
+  .bar { height: 1px; background: #2a3036; position: relative; }
+  .bar i { position: absolute; left: 0; top: -1px; height: 3px; background: var(--ivory); }
+  .bar i.open { background: var(--lime); }
+  .open-tag { color: var(--lime); font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; }
+
+  .metrics { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+  .metric { padding: 20px 16px 18px 0; border-right: 1px solid var(--line); min-width: 0; }
+  .metric:last-child { border-right: 0; padding-right: 0; }
+  .metric .kicker { margin-bottom: 12px; }
+  .metric-value { font-size: 2.15rem; letter-spacing: -0.045em; line-height: 1; }
+  .trend { display: inline-block; margin-top: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--lime); }
+  .metric p { margin-top: 8px; color: var(--muted); font-size: 13px; max-width: 24ch; }
+  .spark { width: 84px; height: 28px; display: block; margin-top: 12px; }
+  .spark polyline { fill: none; stroke: var(--steel); stroke-width: 1.25; }
+  .spark circle { fill: var(--lime); }
+
+  .block { padding: 42px 0 8px; }
+  .block-head {
+    display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 24px; align-items: end; margin-bottom: 22px;
+  }
+  .block-note { color: var(--muted); max-width: 42ch; justify-self: end; }
+  .kw-layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.7fr); gap: 28px; align-items: start; }
+  .plot-wrap { position: relative; background: var(--card); border: 1px solid var(--line); }
+  .plot-scroll { overflow-x: auto; }
+  .plot-scroll svg { min-width: 640px; width: 100%; height: auto; display: block; }
+  .bubble { cursor: pointer; }
+  .bubble circle { stroke: #101214; stroke-width: 1; }
+  .bubble[data-opp="high"] circle { fill: var(--lime); }
+  .bubble[data-opp="mid"] circle { fill: var(--ivory); fill-opacity: 0.88; }
+  .bubble[data-opp="low"] circle { fill: var(--steel); }
+  .bubble.dim { opacity: 0.16; }
+  .bubble.focus circle { stroke: var(--lime); stroke-width: 2; }
+  .tip {
+    position: absolute; z-index: 3; width: max-content; max-width: 240px;
+    background: var(--ivory); color: var(--bg); padding: 8px 10px; pointer-events: none;
+    font-size: 12px;
+  }
+  .tip[hidden] { display: none !important; }
+  .tip strong { display: block; font-family: var(--sans); font-weight: 500; letter-spacing: -0.02em; }
+  .tip span { display: block; margin-top: 3px; font-family: var(--mono); font-size: 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .chip {
+    background: transparent; border: 1px solid var(--line-strong); color: var(--steel);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 6px 8px; border-radius: 2px;
+  }
+  .chip.on, .chip:hover { border-color: var(--lime); color: var(--ivory); }
+  .chip.on { color: var(--bg); background: var(--lime); }
+  .signals { border-top: 1px solid var(--line); }
+  .signal {
+    display: block; width: 100%; text-align: left; background: transparent; border: 0;
+    border-bottom: 1px solid var(--line); color: inherit; padding: 14px 0;
+  }
+  .signal:hover strong, .signal.on strong { color: var(--lime); }
+  .signal strong { display: block; font-weight: 500; font-size: 14.5px; }
+  .signal em { display: block; margin-top: 4px; font-style: normal; color: var(--muted); font-size: 13px; }
+  .signal .meta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); margin-top: 6px; }
+  .footnote { margin-top: 12px; color: var(--steel); font-size: 12px; max-width: 70ch; }
+
+  .profile {
+    display: grid; grid-template-columns: minmax(180px, 240px) 1fr;
+    gap: 18px 28px; padding: 18px 0; border-top: 1px solid var(--line);
+  }
+  .profile header span { display: block; color: var(--steel); font-family: var(--mono); font-size: 12px; margin-top: 3px; }
+  .profile header em { display: block; margin-top: 8px; font-style: normal; color: var(--muted); font-size: 13px; max-width: 32ch; }
+  .gap-row { display: grid; grid-template-columns: 132px 28px 1fr; gap: 10px; align-items: center; margin: 8px 0; font-size: 12.5px; }
+  .gap-row b { font-family: var(--mono); font-weight: 500; font-size: 12px; }
+  .track { height: 2px; background: #2a3036; }
+  .track span { display: block; height: 2px; background: var(--ivory); }
+  .track.hot span { background: var(--lime); height: 3px; }
+
+  .ai-grid { display: grid; grid-template-columns: minmax(180px, 0.85fr) minmax(0, 1.15fr) minmax(200px, 0.85fr); gap: 16px; align-items: stretch; }
+  .q-btn {
+    display: block; width: 100%; text-align: left; background: transparent; border: 0;
+    border-left: 2px solid transparent; color: var(--steel); padding: 10px 10px; font-size: 13.5px; line-height: 1.4;
+  }
+  .q-btn.is-on { color: var(--ivory); border-left-color: var(--lime); background: var(--card); }
+  .q-btn:hover { color: var(--ivory); }
+  .answer-panel { background: var(--card); border: 1px solid var(--line); padding: 18px 18px 16px; min-height: 280px; }
+  .answer-text { font-size: 15.5px; line-height: 1.6; margin-top: 12px; }
+  .flags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .flag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--steel); border: 1px solid var(--line); padding: 4px 6px; }
+  .flag.mid { color: var(--ivory); border-color: var(--line-strong); }
+  .flag.good { color: var(--bg); background: var(--lime); border-color: var(--lime); }
+  .sources-line { margin-top: 14px; color: var(--steel); font-size: 12.5px; }
+  .field { position: relative; aspect-ratio: 300 / 420; width: 100%; max-width: 340px; background: #0c0e10; border: 1px solid var(--line); }
+  .field svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .ln { stroke: var(--steel); stroke-width: 1; opacity: 0.18; }
+  .ln.on { opacity: 0.85; stroke: var(--ivory); }
+  .ln.lime { stroke: var(--lime); opacity: 1; }
+  .ln.dash { stroke-dasharray: 3 3; }
+  .fnode {
+    position: absolute; transform: translate(-50%, -50%);
+    border: 1px solid rgba(243,240,232,0.22); background: #101214;
+    padding: 6px 8px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; white-space: nowrap; color: var(--ivory);
+  }
+  .n-query { left: 50%; top: 9.5%; }
+  .n-answer { left: 50%; top: 31%; }
+  .n-brands { left: 26%; top: 54.8%; }
+  .n-sources { left: 74%; top: 54.8%; }
+  .n-citations { left: 74%; top: 76.2%; }
+  .n-domain { left: 26%; top: 81%; }
+  .n-domain.is-cited { border-color: var(--lime); color: var(--lime); }
+  .n-domain.is-out { opacity: 0.38; }
+  .field-key { margin-top: 8px; color: var(--steel); font-size: 12px; max-width: 36ch; }
+
+  .action { border-top: 1px solid var(--line); }
+  .action-toggle {
+    width: 100%; display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center;
+    background: transparent; border: 0; color: inherit; text-align: left; padding: 16px 0;
+  }
+  .impact { font-size: 1.8rem; letter-spacing: -0.04em; color: var(--ivory); }
+  .action[data-hot="1"] .impact { color: var(--lime); }
+  .action-toggle strong { display: block; font-weight: 500; font-size: 16px; }
+  .action-toggle em { display: block; margin-top: 3px; font-style: normal; color: var(--steel); font-size: 12.5px; }
+  .chev { font-family: var(--mono); font-size: 11px; color: var(--steel); }
+  .action-body { padding: 0 0 16px 76px; color: var(--muted); max-width: 68ch; }
+  .action-body[hidden] { display: none !important; }
+  .action-body p + p { margin-top: 8px; }
+  .queue-btn.is-queued { background: transparent; color: var(--lime); border-color: var(--lime); }
+
+  .ruler { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .ruler-col { padding: 16px 16px 16px 0; }
+  .ruler-col + .ruler-col { border-left: 1px solid var(--line); padding-left: 16px; }
+  .ruler-col span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); }
+  .ruler-col b { display: block; font-family: var(--sans); font-size: 2rem; font-weight: 500; letter-spacing: -0.04em; margin: 6px 0; }
+  .ruler-col.crit b { color: var(--clay); }
+  .ruler-col.warn b { color: var(--sand); }
+  .ruler-col.ok b { color: var(--lime); }
+  .ruler-col i { display: block; height: 2px; background: currentColor; }
+  .ruler-col.crit i { color: var(--clay); width: 18%; }
+  .ruler-col.warn i { color: var(--sand); width: 42%; }
+  .ruler-col.ok i { color: var(--lime); width: 100%; }
+
+  .spine { margin: 8px 0 0 8px; border-left: 1px solid var(--line-strong); padding-left: 26px; }
+  .spine-group { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--steel); padding: 18px 0 4px; }
+  .issue { position: relative; padding: 12px 0; border-bottom: 1px solid rgba(243,240,232,0.06); display: grid; grid-template-columns: 92px 1fr; gap: 12px; }
+  .issue::before {
+    content: ""; position: absolute; left: -30px; top: 18px; width: 7px; height: 7px; border-radius: 50%; background: var(--steel);
+  }
+  .issue.critical::before { background: var(--clay); }
+  .issue.warning::before { background: var(--sand); }
+  .issue.optimized::before { background: var(--lime); }
+  .sev { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding-top: 3px; }
+  .issue.critical .sev { color: var(--clay); }
+  .issue.warning .sev { color: var(--sand); }
+  .issue.optimized .sev { color: var(--lime); }
+  .issue p { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+  .vitals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 18px 0 8px; }
+  .vital { border-top: 1px solid var(--line); padding-top: 12px; }
+  .vital b { display: block; font-family: var(--sans); font-size: 1.6rem; font-weight: 500; letter-spacing: -0.04em; margin: 6px 0; }
+  .statgrid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+  .stat { padding: 16px 16px 16px 0; border-bottom: 1px solid var(--line); }
+  .stat b { display: block; font-family: var(--sans); font-size: 1.7rem; font-weight: 500; letter-spacing: -0.04em; }
+  .stat span { color: var(--steel); font-size: 13px; }
+
+  .table-scroll { overflow-x: auto; border-top: 1px solid var(--line); }
+  table.grid-table { width: 100%; border-collapse: collapse; min-width: 720px; font-size: 13.5px; }
+  .grid-table th {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--steel); font-weight: 500; text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line);
+    background: transparent; cursor: pointer;
+  }
+  .grid-table td { padding: 11px 8px; border-bottom: 1px solid rgba(243,240,232,0.06); vertical-align: middle; }
+  .grid-table tr:hover td { background: rgba(243,240,232,0.03); }
+  .numr { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); font-size: 12px; }
+  .rels { display: inline-flex; gap: 2px; }
+  .rels i { width: 6px; height: 6px; background: #2c3238; display: block; }
+  .rels i.on { background: var(--lime); }
+  .obar { display: inline-block; width: 54px; height: 2px; background: #2a3036; vertical-align: middle; margin-right: 6px; }
+  .obar i { display: block; height: 2px; background: var(--ivory); }
+  tr[data-opp="high"] .obar i { background: var(--lime); }
+  .search {
+    width: min(320px, 100%); background: transparent; border: 0; border-bottom: 1px solid var(--line-strong);
+    padding: 8px 0; border-radius: 0; margin-bottom: 12px; outline: none;
+  }
+  .search:focus { border-bottom-color: var(--lime); }
+  .own { color: var(--lime); }
+  .part { color: var(--sand); }
+  .miss { color: #3a4148; }
+
+  .seq { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .seq-col { border-top: 2px solid var(--line-strong); padding-top: 12px; }
+  .seq-col header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .seq-col header span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); }
+  .seq-item { padding: 12px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 8px; align-items: start; }
+  .seq-item strong { display: block; font-weight: 500; font-size: 14px; }
+  .seq-item em { font-style: normal; color: var(--steel); font-size: 12px; }
+
+  .link-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(240px, 0.7fr); gap: 28px; }
+  .linkmap { position: relative; aspect-ratio: 680 / 360; background: var(--card); border: 1px solid var(--line); }
+  .linkmap svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .lline { stroke: rgba(243,240,232,0.4); stroke-width: 1; }
+  .lline.suggest { stroke: var(--lime); stroke-dasharray: 4 4; opacity: 0.35; }
+  .linkmap.is-hot .lline.suggest { opacity: 0.15; }
+  .linkmap.is-hot .lline.suggest.hot { opacity: 1; stroke-width: 1.6; }
+  .pnode {
+    position: absolute; transform: translate(-50%, -50%);
+    font-size: 12px; padding: 5px 7px; border: 1px solid var(--line-strong); background: #171A1D; white-space: nowrap;
+  }
+  .pnode.ghost { border-style: dashed; color: var(--lime); border-color: var(--lime); }
+  .suggest-btn {
+    display: block; width: 100%; text-align: left; background: transparent; border: 0;
+    border-top: 1px solid var(--line); color: inherit; padding: 12px 0;
+  }
+  .suggest-btn strong { display: block; font-weight: 500; }
+  .suggest-btn span { color: var(--muted); font-size: 13px; }
+  .suggest-btn.on strong { color: var(--lime); }
+
+  .gap-toggle {
+    width: 100%; display: grid; grid-template-columns: 1.4fr 0.6fr 0.6fr 0.7fr 52px;
+    gap: 8px; text-align: left; background: transparent; border: 0; border-top: 1px solid var(--line);
+    color: inherit; padding: 12px 0; align-items: center;
+  }
+  .gap-body { padding: 0 0 12px; color: var(--muted); max-width: 70ch; }
+  .gap-body[hidden] { display: none !important; }
+  .pri { font-family: var(--mono); color: var(--lime); }
+
+  .report-layout { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 28px; align-items: start; }
+  .report-index { position: sticky; top: 72px; display: flex; flex-direction: column; gap: 6px; }
+  .report-index a { text-decoration: none; color: var(--steel); font-size: 13px; }
+  .report-index a.on, .report-index a:hover { color: var(--lime); }
+  .sheet { background: var(--surface); border: 1px solid var(--line-strong); padding: 36px 36px 48px; }
+  .sheet-top { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line-strong); padding-bottom: 18px; margin-bottom: 22px; }
+  .sheet h2 { margin: 28px 0 8px; font-size: 1.45rem; scroll-margin-top: 80px; }
+  .sheet p { color: var(--muted); margin-top: 8px; max-width: 68ch; }
+  .sheet ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+  .sheet li { margin: 4px 0; }
+  .sheet table { min-width: 0; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; max-width: 760px; }
+  .form-grid .full { grid-column: 1 / -1; }
+  label span { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); margin-bottom: 6px; }
+  input[type="text"], input[type="url"], input[type="number"], select, textarea {
+    width: 100%; background: #101214; border: 1px solid rgba(243,240,232,0.14);
+    color: var(--ivory); padding: 10px 12px; border-radius: 2px; outline: none;
+  }
+  textarea { min-height: 110px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { border-color: var(--lime); }
+  .check { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 14px; }
+  .form-actions { display: flex; gap: 10px; margin-top: 8px; }
+
+  .scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 30; }
+  .scrim.show { display: block; }
+  .modal-back {
+    position: fixed; inset: 0; z-index: 60; background: rgba(8,9,10,0.72);
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-back.show { display: flex; }
+  .modal {
+    width: min(520px, 100%); background: var(--surface); border: 1px solid var(--line-strong);
+    border-top: 2px solid var(--lime); padding: 26px 24px 22px;
+  }
+  .modal h2 { font-size: 1.7rem; margin-bottom: 8px; }
+  .modal p { color: var(--muted); margin-bottom: 16px; }
+  .stages { list-style: none; margin: 14px 0 0; padding: 0; }
+  .stages li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--line); color: var(--steel); font-size: 13.5px; }
+  .stages li.done { color: var(--ivory); }
+  .stages li.done i { color: var(--lime); font-style: normal; }
+  .modal-actions { display: flex; gap: 8px; margin-top: 16px; }
+  .note { color: var(--sand); font-size: 13px; min-height: 1.2em; margin-top: 8px; }
+  #toast {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(10px);
+    background: var(--ivory); color: var(--bg); padding: 10px 14px; font-size: 13px;
+    opacity: 0; pointer-events: none; z-index: 80; transition: opacity 180ms ease, transform 180ms ease;
+    max-width: min(92vw, 420px);
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .kw-tools { display: flex; justify-content: space-between; gap: 12px; align-items: end; flex-wrap: wrap; margin-bottom: 8px; }
+
+  @media (max-width: 1100px) {
+    .metrics { grid-template-columns: repeat(3, 1fr); }
+    .metric { border-right: 0; border-bottom: 1px solid var(--line); padding: 16px 12px 16px 0; }
+    .block-head, .hero-app, .method, .kw-layout, .ai-grid, .link-layout, .report-layout { grid-template-columns: 1fr; }
+    .block-note { justify-self: start; }
+    .lhero { grid-template-columns: 1fr; min-height: 0; padding-top: 36px; }
+    .strip-inner { grid-template-columns: 1fr 1fr; }
+    .score-arc, .score-row, .score-label, .confidence { margin-left: 0; text-align: left; justify-content: flex-start; }
+  }
+  @media (max-width: 960px) {
+    body.app-mode #view-app, html.boot-app #view-app { display: block; height: 100vh; }
+    .sidebar {
+      position: fixed; z-index: 40; top: 0; left: 0; height: 100%;
+      width: min(300px, 88vw); transform: translateX(-105%);
+      transition: transform 220ms ease;
+    }
+    .sidebar.open { transform: none; }
+    .side-close, .menu-btn { display: inline-flex; }
+    .main { height: 100vh; }
+  }
+  @media (max-width: 720px) {
+    .wrap { padding: 0 16px; }
+    .main-pad { padding: 6px 16px 56px; }
+    .topbar { padding: 12px 14px; flex-wrap: wrap; }
+    .hide-sm { display: none !important; }
+    .metrics, .ruler, .vitals, .statgrid, .seq, .form-grid { grid-template-columns: 1fr; }
+    .profile, .gap-toggle, .action-toggle { grid-template-columns: 1fr; }
+    .action-body { padding-left: 0; }
+    .gap-row { grid-template-columns: 1fr 28px; }
+    .gap-row .track { grid-column: 1 / -1; }
+    .sheet { padding: 20px 16px 32px; }
+    .report-index { position: static; flex-direction: row; overflow: auto; gap: 12px; }
+    .wordmark { letter-spacing: 0.08em; font-size: 12px; }
+    .lnav-actions .project-chip { display: none; }
+    .lhero h1 { font-size: clamp(2.5rem, 12vw, 3.6rem); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important; transition: none !important;
+    }
+    .arc-fill { stroke-dashoffset: 0; }
+  }
+  @media print {
+    body * { visibility: hidden; }
+    #sheet, #sheet * { visibility: visible; }
+    #sheet { position: absolute; left: 0; top: 0; width: 100%; background: white !important; color: #161616 !important; border: 0; }
+    #sheet p, #sheet li, #sheet td, #sheet h2, #sheet h3 { color: #161616 !important; }
+    .no-print { display: none !important; }
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #2a3034; }
+  ::-webkit-scrollbar-track { background: transparent; }
+</style>
+</head>
+<body>
+<a class="vh" href="#main">Skip to content</a>
+
+<div id="view-landing">
+  <header class="lnav">
+    <div class="wrap lnav-inner">
+      <a class="brand" href="#/">
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 25.5h22" fill="none" stroke="#78838C" stroke-width="1"/><path d="M8 22.5 16 7.5 24 22.5" fill="none" stroke="#F3F0E8" stroke-width="1.4"/><circle cx="16" cy="7.5" r="2.1" fill="#C7F36B"/><circle cx="8" cy="22.5" r="1.45" fill="#F3F0E8"/><circle cx="24" cy="22.5" r="1.45" fill="#F3F0E8"/><circle cx="16" cy="16.2" r="1.15" fill="#F3F0E8"/></svg>
+        <span class="wordmark">SEO<span class="comma">,</span> INTELLIGENCE</span>
+      </a>
+      <div class="lnav-actions">
+        <span class="project-chip">B.Tech · Final year</span>
+        <button class="btn small" type="button" data-open-analyze>Analyze a Website</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="lhero-bleed">
+    <div class="wrap lhero">
+      <div>
+        <p class="coords">18.53°N · 72.93°E · Raigad, Konkan</p>
+        <h1>See what search<br>can't show you<span class="per">.</span></h1>
+        <p class="lede">One intelligence layer for SEO performance, competitor gaps, keyword opportunities, and AI search visibility.</p>
+        <div class="cta-row">
+          <button class="btn" type="button" data-open-analyze>Analyze a Website</button>
+          <a class="btn ghost" href="#/overview">Explore Intelligence</a>
+        </div>
+      </div>
+      <div>
+        <div class="imap" id="imap">
+          <svg viewBox="0 0 640 500" role="img" aria-label="Search intelligence map connecting website, search, AI search, competitors, and opportunities">
+            <circle cx="250" cy="260" r="110" fill="none" stroke="rgba(243,240,232,0.07)"/>
+            <circle cx="250" cy="260" r="180" fill="none" stroke="rgba(243,240,232,0.055)"/>
+            <circle cx="250" cy="260" r="240" fill="none" stroke="rgba(243,240,232,0.04)"/>
+            <g class="edge" data-a="website" data-b="search"><line x1="250" y1="260" x2="281" y2="83"/></g>
+            <g class="edge dashed" data-a="website" data-b="ai"><line x1="250" y1="260" x2="478" y2="186"/></g>
+            <g class="edge" data-a="website" data-b="competitors"><line x1="250" y1="260" x2="147" y2="407"/></g>
+            <g class="edge" data-a="website" data-b="opportunities"><line x1="250" y1="260" x2="397" y2="423"/></g>
+            <g class="edge" data-a="search" data-b="queries"><line x1="281" y1="83" x2="345" y2="205"/></g>
+            <g class="edge" data-a="queries" data-b="ai"><line x1="345" y1="205" x2="478" y2="186"/></g>
+            <g class="edge" data-a="competitors" data-b="opportunities"><line x1="147" y1="407" x2="397" y2="423"/></g>
+            <g class="edge" data-a="search" data-b="ai"><line x1="281" y1="83" x2="478" y2="186"/></g>
+          </svg>
+          <i class="dot subject" style="left:39.06%;top:52%"></i>
+          <i class="dot" style="left:43.91%;top:16.6%"></i>
+          <i class="dot" style="left:74.69%;top:37.2%"></i>
+          <i class="dot" style="left:22.97%;top:81.4%"></i>
+          <i class="dot opp" style="left:62.03%;top:84.6%"></i>
+          <i class="dot minor" style="left:53.91%;top:41%"></i>
+          <button class="mlabel" type="button" data-node="website" style="left:39.06%;top:52%">Website</button>
+          <button class="mlabel above" type="button" data-node="search" style="left:43.91%;top:16.6%">Search engine</button>
+          <button class="mlabel right" type="button" data-node="ai" style="left:74.69%;top:37.2%">AI search</button>
+          <button class="mlabel" type="button" data-node="competitors" style="left:22.97%;top:81.4%">Competitors</button>
+          <button class="mlabel" type="button" data-node="opportunities" style="left:62.03%;top:84.6%">Opportunities</button>
+          <button class="mlabel above minor" type="button" data-node="queries" style="left:53.91%;top:41%">Queries</button>
+        </div>
+        <p class="map-readout" id="map-readout">Five fields. One reading. Hover a node — the product is the relationship, not a rank.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip" aria-label="Live intelligence strip">
+    <div class="wrap strip-inner">
+      <div class="strip-live"><i class="live-dot" aria-hidden="true"></i> Snapshot · 26 Sep 2026 · 14:40 IST</div>
+      <div class="strip-item"><span>SEO Health</span><strong>82<em>+2</em></strong></div>
+      <div class="strip-item"><span>Keyword Opportunity</span><strong>128<em>+18</em></strong></div>
+      <div class="strip-item"><span>AI Visibility</span><strong>23<em>+7</em></strong></div>
+      <div class="strip-item"><span>Content Gap</span><strong>41<em>−6</em></strong></div>
+    </div>
+  </section>
+
+  <section class="method wrap" id="layer">
+    <div>
+      <p class="kicker">The layer</p>
+      <h2>Four readings. One field.</h2>
+    </div>
+    <ol>
+      <li><span class="idx">01</span><div><b>Performance</b><p>Health of the host you actually have — crawl, index, speed, duplication. A score without the faults named is decoration.</p></div></li>
+      <li><span class="idx">02</span><div><b>Demand</b><p>Queries with volume and a weak owner. Difficulty is a constraint, not a personality.</p></div></li>
+      <li><span class="idx">03</span><div><b>Gaps</b><p>What four competitors already published: keywords, topics, pages, and the links you cannot copy but can be cited by.</p></div></li>
+      <li><span class="idx">04</span><div><b>Machine answers</b><p>Whether AI responses mention the place, and whether they cite the domain. Mention is not the shelf.</p></div></li>
+    </ol>
+  </section>
+
+  <footer class="lfoot">
+    <div class="wrap foot-grid">
+      <div>
+        <div class="wordmark">SEO<span class="comma">,</span> INTELLIGENCE</div>
+        <p class="motto" style="margin-top:10px">Less decoration. More intelligence.</p>
+      </div>
+      <p>Final-year B.Tech project. A demonstration reading of revdandatourism.com — internally consistent, not a live third-party index. © 2026</p>
+    </div>
+  </footer>
+</div>
+
+<div id="view-app">
+  <aside class="sidebar" id="sidebar" aria-label="Application">
+    <div class="side-brand">
+      <a class="brand" href="#/overview">
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 25.5h22" fill="none" stroke="#78838C" stroke-width="1"/><path d="M8 22.5 16 7.5 24 22.5" fill="none" stroke="#F3F0E8" stroke-width="1.4"/><circle cx="16" cy="7.5" r="2.1" fill="#C7F36B"/><circle cx="8" cy="22.5" r="1.45" fill="#F3F0E8"/><circle cx="24" cy="22.5" r="1.45" fill="#F3F0E8"/><circle cx="16" cy="16.2" r="1.15" fill="#F3F0E8"/></svg>
+        <span class="wordmark">SEO<span class="comma">,</span> INTELLIGENCE</span>
+      </a>
+      <button class="btn ghost small side-close" type="button" id="side-close">Close</button>
+    </div>
+    <a class="side-project" href="#/project">
+      <span class="kicker">Active project</span>
+      <strong>Revdanda Tourism</strong>
+    </a>
+    <nav class="nav">
+      <div class="nav-label">Read</div>
+      <a href="#/overview" data-panel="overview"><span class="idx">01</span> Overview</a>
+      <a href="#/audit" data-panel="audit"><span class="idx">02</span> Website Audit</a>
+      <a href="#/keywords" data-panel="keywords"><span class="idx">03</span> Keyword Intelligence</a>
+      <a href="#/competitors" data-panel="competitors"><span class="idx">04</span> Competitor Intelligence</a>
+      <a href="#/ai" data-panel="ai"><span class="idx">05</span> AI Search Visibility</a>
+      <div class="nav-label">Interpret</div>
+      <a href="#/gaps" data-panel="gaps"><span class="idx">06</span> Content Gaps</a>
+      <a href="#/linking" data-panel="linking"><span class="idx">07</span> Internal Linking</a>
+      <a href="#/actions" data-panel="actions"><span class="idx">08</span> SEO Recommendations <span class="badge" id="queue-count" hidden>0</span></a>
+      <a href="#/reports" data-panel="reports"><span class="idx">09</span> Reports</a>
+      <div class="nav-label">System</div>
+      <a href="#/settings" data-panel="settings"><span class="idx">—</span> Settings</a>
+      <a href="#/project" data-panel="project"><span class="idx">—</span> Project</a>
+    </nav>
+    <div class="side-foot"><a href="#/">Return to index</a></div>
+  </aside>
+
+  <div class="main" id="main">
+    <header class="topbar">
+      <div class="top-left">
+        <button class="btn ghost small menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="sidebar">Menu</button>
+        <div class="top-title" id="top-title">Overview</div>
+      </div>
+      <div class="top-meta">
+        <div class="hide-sm"><span>Project</span><b>Revdanda Tourism</b></div>
+        <div class="hide-sm"><span>Website</span><b>revdandatourism.com</b></div>
+        <div><span>Last analyzed</span><b class="analyzed">26 Sep 2026</b></div>
+        <span class="demo-flag hide-sm">Demonstration reading</span>
+        <button class="btn small" type="button" data-open-analyze>Run Analysis</button>
+      </div>
+    </header>
+
+    <div class="main-pad">
+      <section class="panel" id="panel-overview">
+        <div class="hero-app">
+          <div>
+            <p class="kicker">01 — Landscape · Reading 04</p>
+            <h2>Your search landscape, decoded.</h2>
+            <p class="sub">Find where your website is visible, where competitors are winning, and where new search opportunities exist.</p>
+            <div class="hero-actions">
+              <a class="link" href="#/keywords">Open keyword field</a>
+              <a class="link" href="#/reports">Open the report</a>
+            </div>
+          </div>
+          <div class="score-block">
+            <svg class="score-arc" viewBox="0 0 200 118" role="img" aria-label="SEO Intelligence Score 82 out of 100">
+              <path d="M14 104 A86 86 0 0 1 186 104" fill="none" stroke="#2a3036" stroke-width="1.5" pathLength="100"/>
+              <path class="arc-fill" d="M14 104 A86 86 0 0 1 186 104" fill="none" stroke="#C7F36B" stroke-width="1.5" pathLength="100" stroke-linecap="butt"/>
+            </svg>
+            <div class="score-row"><div class="score-num">82<small>/ 100</small></div></div>
+            <div class="score-label">SEO Intelligence Score</div>
+            <p class="confidence">Confidence 0.86 · 186 URLs · 640 terms · 4 rivals · 40 answers</p>
+            <ul class="pillars">
+              <li><span>Technical</span><span class="bar"><i style="width:78%"></i></span><b>78</b></li>
+              <li><span>Content</span><span class="bar"><i style="width:84%"></i></span><b>84</b></li>
+              <li><span>Authority <i class="open-tag">OPEN</i></span><span class="bar"><i class="open" style="width:71%"></i></span><b>71</b></li>
+              <li><span>AI presence <i class="open-tag">OPEN</i></span><span class="bar"><i class="open" style="width:69%"></i></span><b>69</b></li>
+              <li><span>On-page</span><span class="bar"><i style="width:91%"></i></span><b>91</b></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="metrics" aria-label="Core metrics">
+          <article class="metric">
+            <p class="kicker">Organic visibility</p>
+            <div class="metric-value">64.2</div>
+            <span class="trend">+4.2 pts</span>
+            <svg class="spark" viewBox="0 0 84 28" aria-hidden="true"><polyline points="0,22 10,20 20,21 30,16 40,15 50,12 60,10 70,8 84,4"/><circle cx="84" cy="4" r="1.7"/></svg>
+            <p>Share of tracked queries sitting in the top 20.</p>
+          </article>
+          <article class="metric">
+            <p class="kicker">Keyword opportunities</p>
+            <div class="metric-value">128</div>
+            <span class="trend">+18</span>
+            <svg class="spark" viewBox="0 0 84 28" aria-hidden="true"><polyline points="0,24 10,22 20,18 30,19 40,14 50,12 60,9 70,6 84,3"/><circle cx="84" cy="3" r="1.7"/></svg>
+            <p>Terms with demand and a weak page on this host.</p>
+          </article>
+          <article class="metric">
+            <p class="kicker">AI mentions</p>
+            <div class="metric-value">23</div>
+            <span class="trend">+7</span>
+            <svg class="spark" viewBox="0 0 84 28" aria-hidden="true"><polyline points="0,20 10,18 20,19 30,16 40,17 50,12 60,8 70,6 84,2"/><circle cx="84" cy="2" r="1.7"/></svg>
+            <p>Sampled answers that name Revdanda or the domain.</p>
+          </article>
+          <article class="metric">
+            <p class="kicker">Content gaps</p>
+            <div class="metric-value">41</div>
+            <span class="trend">−6 improved</span>
+            <svg class="spark" viewBox="0 0 84 28" aria-hidden="true"><polyline points="0,6 10,8 20,10 30,12 40,14 50,16 60,18 70,20 84,23"/><circle cx="84" cy="23" r="1.7"/></svg>
+            <p>Topics competitors cover that this site does not.</p>
+          </article>
+          <article class="metric">
+            <p class="kicker">Technical issues</p>
+            <div class="metric-value">17</div>
+            <span class="trend">−3 improved</span>
+            <svg class="spark" viewBox="0 0 84 28" aria-hidden="true"><polyline points="0,4 10,6 20,5 30,9 40,11 50,14 60,16 70,18 84,22"/><circle cx="84" cy="22" r="1.7"/></svg>
+            <p>Open crawl, index, and performance faults.</p>
+          </article>
+        </div>
+
+        <section class="block" id="sec-keywords">
+          <div class="block-head">
+            <div>
+              <p class="kicker">03 — Keyword intelligence</p>
+              <h2>Where demand meets opportunity</h2>
+            </div>
+            <p class="block-note">Difficulty across, volume up on a log scale, bubble size is business relevance. Lime is a high-opportunity term — demand you can actually occupy.</p>
+          </div>
+          <div class="chips" role="group" aria-label="Filter the field">
+            <button class="chip on" type="button" data-filter="all">All</button>
+            <button class="chip" type="button" data-filter="high">High opportunity</button>
+            <button class="chip" type="button" data-filter="info">Informational</button>
+            <button class="chip" type="button" data-filter="trans">Transactional</button>
+            <button class="chip" type="button" data-filter="local">Local</button>
+          </div>
+          <div class="kw-layout">
+            <div class="plot-wrap">
+              <div class="plot-scroll">
+                <svg viewBox="0 0 640 440" role="img" aria-label="Scatter plot of keyword difficulty against search volume">
+                  <rect x="48" y="24" width="288" height="180" fill="#C7F36B" opacity="0.035"/>
+                  <g stroke="rgba(243,240,232,0.08)" stroke-width="1">
+                    <line x1="48" y1="60" x2="624" y2="60"/><line x1="48" y1="131" x2="624" y2="131"/>
+                    <line x1="48" y1="226" x2="624" y2="226"/><line x1="48" y1="297" x2="624" y2="297"/>
+                    <line x1="48" y1="368" x2="624" y2="368"/>
+                    <line x1="192" y1="24" x2="192" y2="404"/><line x1="336" y1="24" x2="336" y2="404"/><line x1="480" y1="24" x2="480" y2="404"/>
+                  </g>
+                  <line x1="48" y1="404" x2="624" y2="404" stroke="#78838C" stroke-opacity="0.55"/>
+                  <line x1="48" y1="24" x2="48" y2="404" stroke="#78838C" stroke-opacity="0.55"/>
+                  <g fill="#78838C" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11">
+                    <text x="8" y="64">10k</text><text x="14" y="135">5k</text><text x="14" y="230">2k</text><text x="14" y="301">1k</text><text x="10" y="372">500</text>
+                    <text x="44" y="424">0</text><text x="326" y="424">50</text><text x="608" y="424">100</text>
+                    <text x="56" y="40" fill="#C7F36B">PURSUE</text>
+                    <text x="500" y="40">LONG GAME</text>
+                    <text x="56" y="394">NICHE</text>
+                    <text x="540" y="394">DEFER</text>
+                  </g>
+                  <text x="250" y="436" fill="#78838C" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10" letter-spacing="1">KEYWORD DIFFICULTY</text>
+                  <text x="56" y="18" fill="#78838C" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10">VOLUME · LOG</text>
+                  <g class="bubble" tabindex="0" role="button" data-q="best beaches near alibaug" data-vol="12,100" data-diff="54" data-score="64" data-intent="info" data-opp="mid"><title>best beaches near alibaug</title><circle cx="359" cy="40" r="11"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="alibaug weekend getaway" data-vol="8,100" data-diff="47" data-score="70" data-intent="trans" data-opp="mid"><circle cx="319" cy="81" r="13"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="alibaug resorts price" data-vol="6,600" data-diff="63" data-score="34" data-intent="trans" data-opp="low"><circle cx="411" cy="102" r="8"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="murud janjira fort" data-vol="5,400" data-diff="22" data-score="91" data-intent="info" data-opp="high"><circle cx="175" cy="123" r="14"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="quiet beaches near mumbai" data-vol="4,800" data-diff="36" data-score="88" data-intent="info" data-opp="high"><circle cx="255" cy="135" r="13"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="monsoon trip konkan" data-vol="4,400" data-diff="41" data-score="52" data-intent="info" data-opp="mid"><circle cx="284" cy="144" r="9"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="mumbai to revdanda" data-vol="3,600" data-diff="31" data-score="80" data-intent="nav" data-opp="high"><circle cx="227" cy="165" r="12"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="how to reach murud from mumbai" data-vol="3,200" data-diff="24" data-score="76" data-intent="info" data-opp="mid"><circle cx="186" cy="177" r="11"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="revdanda beach" data-vol="2,900" data-diff="18" data-score="78" data-intent="info" data-opp="mid"><circle cx="152" cy="187" r="12"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="revdanda beach resorts" data-vol="2,400" data-diff="27" data-score="84" data-intent="trans" data-opp="high"><circle cx="204" cy="207" r="13"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="konkan coastal tourism" data-vol="1,900" data-diff="29" data-score="58" data-intent="info" data-opp="mid"><circle cx="215" cy="231" r="9"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="revdanda fort timings" data-vol="880" data-diff="9" data-score="74" data-intent="info" data-opp="mid"><circle cx="100" cy="305" r="9"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="seafood restaurants revdanda" data-vol="720" data-diff="14" data-score="57" data-intent="local" data-opp="mid"><circle cx="132" cy="332" r="7"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="revdanda homestay" data-vol="640" data-diff="11" data-score="86" data-intent="trans" data-opp="high"><circle cx="108" cy="350" r="11"/></g>
+                  <g class="bubble" tabindex="0" role="button" data-q="kashid beach vs revdanda" data-vol="510" data-diff="16" data-score="63" data-intent="comp" data-opp="mid"><circle cx="148" cy="372" r="7"/></g>
+                </svg>
+              </div>
+              <div class="tip" hidden><strong></strong><span></span></div>
+            </div>
+            <aside>
+              <p class="kicker">High-opportunity signals</p>
+              <div class="signals">
+                <button class="signal" type="button" data-q="murud janjira fort"><strong>Murud Janjira fort</strong><em>You rank beside the fort, not for the day around it.</em><div class="meta">Opp 91 · Diff 22 · Vol 5.4k</div></button>
+                <button class="signal" type="button" data-q="quiet beaches near mumbai"><strong>Quiet beaches near Mumbai</strong><em>AI answers this prompt. The domain is not in the source set.</em><div class="meta">Opp 88 · Diff 36 · Vol 4.8k</div></button>
+                <button class="signal" type="button" data-q="revdanda homestay"><strong>Revdanda homestay</strong><em>Clear stay intent. No indexable cluster answers it.</em><div class="meta">Opp 86 · Diff 11 · Vol 640</div></button>
+                <button class="signal" type="button" data-q="revdanda beach resorts"><strong>Revdanda beach resorts</strong><em>Commercial intent, weak local owner, reachable difficulty.</em><div class="meta">Opp 84 · Diff 27 · Vol 2.4k</div></button>
+              </div>
+              <p style="margin-top:14px"><a class="link" href="#/keywords">Open the term table</a></p>
+            </aside>
+          </div>
+          <p class="footnote">Volumes are monthly estimates for India. Difficulty is a composite of referring-domain crowding and SERP density in this reading — not a borrowed index. Lime marks judgment, not just the formula.</p>
+        </section>
+
+        <section class="block" id="sec-competitors">
+          <div class="block-head">
+            <div>
+              <p class="kicker">04 — Competitor intelligence</p>
+              <h2>Competitors are revealing the gaps.</h2>
+            </div>
+            <p class="block-note">Each bar is what they hold that this host does not. Lime marks the widest gap on that profile — the place their archive is teaching you.</p>
+          </div>
+          <article class="profile">
+            <header><strong>Alibaug Tourism</strong><span>alibaugtourism.org</span><em>Publishes itineraries and stay pages this site does not have.</em></header>
+            <div>
+              <div class="gap-row"><span>Missing keywords</span><b>34</b><div class="track hot"><span style="width:100%"></span></div></div>
+              <div class="gap-row"><span>Missing topics</span><b>12</b><div class="track"><span style="width:75%"></span></div></div>
+              <div class="gap-row"><span>Missing backlinks</span><b>19</b><div class="track"><span style="width:59%"></span></div></div>
+              <div class="gap-row"><span>Missing pages</span><b>8</b><div class="track"><span style="width:67%"></span></div></div>
+            </div>
+          </article>
+          <article class="profile">
+            <header><strong>Konkan Guide</strong><span>konkanguide.in</span><em>Wins fort and beach queries with thin but complete guides.</em></header>
+            <div>
+              <div class="gap-row"><span>Missing keywords</span><b>21</b><div class="track hot"><span style="width:62%"></span></div></div>
+              <div class="gap-row"><span>Missing topics</span><b>9</b><div class="track"><span style="width:56%"></span></div></div>
+              <div class="gap-row"><span>Missing backlinks</span><b>7</b><div class="track"><span style="width:22%"></span></div></div>
+              <div class="gap-row"><span>Missing pages</span><b>5</b><div class="track"><span style="width:42%"></span></div></div>
+            </div>
+          </article>
+          <article class="profile">
+            <header><strong>MTDC</strong><span>maharashtratourism.gov.in</span><em>Institutional links you cannot copy. You can still be the clearer guide they might cite.</em></header>
+            <div>
+              <div class="gap-row"><span>Missing keywords</span><b>16</b><div class="track"><span style="width:47%"></span></div></div>
+              <div class="gap-row"><span>Missing topics</span><b>6</b><div class="track"><span style="width:38%"></span></div></div>
+              <div class="gap-row"><span>Missing backlinks</span><b>28</b><div class="track hot"><span style="width:100%"></span></div></div>
+              <div class="gap-row"><span>Missing pages</span><b>4</b><div class="track"><span style="width:33%"></span></div></div>
+            </div>
+          </article>
+          <article class="profile">
+            <header><strong>Beach Escape</strong><span>beachescape.co</span><em>Commercial stay pages aimed at the same Mumbai weekend.</em></header>
+            <div>
+              <div class="gap-row"><span>Missing keywords</span><b>27</b><div class="track hot"><span style="width:79%"></span></div></div>
+              <div class="gap-row"><span>Missing topics</span><b>11</b><div class="track"><span style="width:69%"></span></div></div>
+              <div class="gap-row"><span>Missing backlinks</span><b>14</b><div class="track"><span style="width:44%"></span></div></div>
+              <div class="gap-row"><span>Missing pages</span><b>9</b><div class="track"><span style="width:75%"></span></div></div>
+            </div>
+          </article>
+          <p style="margin-top:16px"><a class="link" href="#/competitors">Open the ownership matrix</a></p>
+        </section>
+
+        <section class="block" id="sec-ai">
+          <div class="block-head">
+            <div>
+              <p class="kicker">05 — AI search visibility</p>
+              <h2>The search result is no longer the destination.</h2>
+            </div>
+            <p class="block-note">When people ask models where to go, the citation graph decides who exists. 23 of 40 archived answers mention the coast. 5 cite the domain.</p>
+          </div>
+          <div class="ai-stage" id="ai-stage">
+            <div class="ai-grid">
+              <div role="listbox" aria-label="Sampled queries">
+                <button class="q-btn is-on" type="button" data-sample="0">Where should I stay for a quiet beach weekend near Mumbai?</button>
+                <button class="q-btn" type="button" data-sample="1">Tell me the history of Revdanda Fort.</button>
+                <button class="q-btn" type="button" data-sample="2">Best seafood on the Konkan coast?</button>
+                <button class="q-btn" type="button" data-sample="3">Alibaug or Revdanda for a weekend?</button>
+                <button class="q-btn" type="button" data-sample="4">Family-friendly fort trip from Mumbai.</button>
+              </div>
+              <div class="answer-panel">
+                <p class="kicker">Archived sample · not a live model call</p>
+                <p class="answer-text">For a quiet weekend, the usual suggestions are Alibaug for stays, Kashid for a longer beach, and Murud if you want the fort and fewer shops. Revdanda sits between them, with a smaller fort and a long beach, but the booking is sent to Alibaug properties. The place is named in passing. The domain is not the source.</p>
+                <div class="flags"><span class="flag mid">Brand mentioned</span><span class="flag">Domain not cited</span></div>
+                <p class="sources-line">Sources in this answer: alibaugtourism.org · a weekend guide · MTDC</p>
+              </div>
+              <div>
+                <div class="field" aria-hidden="true">
+                  <svg viewBox="0 0 300 420">
+                    <line class="ln qa on" x1="150" y1="40" x2="150" y2="130"/>
+                    <line class="ln ab on" x1="150" y1="130" x2="78" y2="230"/>
+                    <line class="ln as on" x1="150" y1="130" x2="222" y2="230"/>
+                    <line class="ln sc on" x1="222" y1="230" x2="222" y2="320"/>
+                    <line class="ln bd on dash" x1="78" y1="230" x2="78" y2="340"/>
+                    <line class="ln cd" x1="222" y1="320" x2="78" y2="340"/>
+                  </svg>
+                  <span class="fnode n-query">User query</span>
+                  <span class="fnode n-answer">AI answer</span>
+                  <span class="fnode n-brands">Brands</span>
+                  <span class="fnode n-sources">Sources</span>
+                  <span class="fnode n-citations">Citations</span>
+                  <span class="fnode n-domain is-out">Your domain</span>
+                </div>
+                <p class="field-key">Solid: retrieved. Dashed: named, not sourced. Lime: your domain is in the citation set.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="block" id="sec-actions">
+          <div class="block-head">
+            <div>
+              <p class="kicker">08 — Action queue</p>
+              <h2>What should happen next?</h2>
+            </div>
+            <p class="block-note">Ordered by potential impact on visibility, not by how easy the ticket looks. Six actions. Start at 92.</p>
+          </div>
+          <div id="queue-overview">
+            <article class="action" data-hot="1">
+              <button class="action-toggle" type="button" aria-expanded="false"><span class="impact">92</span><span><strong>Publish the Murud–Revdanda coastal guide</strong><em>Content · Est. +1,400 visits / month</em></span><span class="chev">Open</span></button>
+              <div class="action-body" hidden>
+                <p>Competitors own the day-trip and “how to reach” intent around Murud-Janjira. Revdanda is the natural stop on that road and has no definitive guide. One long page can attach the site to demand it currently only neighbors.</p>
+                <p>Name the route, timings, who it is for, a meal, and a bed. Link the fort page into it. Do not publish another homepage paragraph and call it a guide.</p>
+                <p style="margin-top:12px"><button class="btn small queue-btn" type="button" data-id="a1">Add to queue</button></p>
+              </div>
+            </article>
+            <article class="action" data-hot="1">
+              <button class="action-toggle" type="button" aria-expanded="false"><span class="impact">86</span><span><strong>Repair canonical host conflicts</strong><em>Technical · 9 URLs point at http or a twin host</em></span><span class="chev">Open</span></button>
+              <div class="action-body" hidden>
+                <p>Indexation is splitting. Until the canonical host is one host, new pages will not accumulate cleanly. This is ahead of more writing on purpose.</p>
+                <p style="margin-top:12px"><button class="btn small queue-btn" type="button" data-id="a2">Add to queue</button></p>
+              </div>
+            </article>
+            <article class="action" data-hot="1">
+              <button class="action-toggle" type="button" aria-expanded="false"><span class="impact">81</span><span><strong>Become citable on quiet-beach answers</strong><em>AI visibility · 23 mentions, 5 citations</em></span><span class="chev">Open</span></button>
+              <div class="action-body" hidden>
+                <p>Models name the coast and cite other guides. A sourced, specific page — distances, months, crowd, ferry notes — is what citation graphs pick up. Mention is not the goal. The source list is.</p>
+                <p style="margin-top:12px"><button class="btn small queue-btn" type="button" data-id="a3">Add to queue</button></p>
+              </div>
+            </article>
+            <article class="action">
+              <button class="action-toggle" type="button" aria-expanded="false"><span class="impact">74</span><span><strong>Link the fort page to stays and food</strong><em>Internal linking · a ranking page that dead-ends</em></span><span class="chev">Open</span></button>
+              <div class="action-body" hidden>
+                <p>The fort page is one of the few URLs that already retrieves. It introduces neither a bed nor a meal. Suggested anchors live in Internal Linking.</p>
+                <p style="margin-top:12px"><button class="btn small queue-btn" type="button" data-id="a4">Add to queue</button></p>
+              </div>
+            </article>
+            <article class="action">
+              <button class="action-toggle" type="button" aria-expanded="false"><span class="impact">70</span><span><strong>Open a stay cluster for “revdanda homestay”</strong><em>Keyword · difficulty 11 · no indexable URL</em></span><span class="chev">Open</span></button>
+              <div class="action-body" hidden>
+                <p>Transactional intent with almost no competing depth. A hub plus a few specific stay pages beats another generic sentence on the homepage.</p>
+                <p style="margin-top:12px"><button class="btn small queue-btn" type="button" data-id="a5">Add to queue</button></p>
+              </div>
+            </article>
+            <article class="action">
+              <button class="action-toggle" type="button" aria-expanded="false"><span class="impact">64</span><span><strong>Write the comparison the market already asks</strong><em>Content · Kashid, Alibaug, Revdanda, Murud</em></span><span class="chev">Open</span></button>
+              <div class="action-body" hidden>
+                <p>Comparison queries are owned entirely outside this host. A fair, specific comparison is also the kind of page archived answers tend to quote.</p>
+                <p style="margin-top:12px"><button class="btn small queue-btn" type="button" data-id="a6">Add to queue</button></p>
+              </div>
+            </article>
+          </div>
+          <p style="margin-top:16px"><a class="link" href="#/actions">Sequence the queue</a></p>
+        </section>
+
+        <section class="block" id="sec-audit">
+          <div class="block-head">
+            <div>
+              <p class="kicker">02 — Website audit</p>
+              <h2>Faults, named by severity.</h2>
+            </div>
+            <p class="block-note">The score is 82 because the base is sound, not because the host is clean. Three faults are blocking the rest of the work.</p>
+          </div>
+          <div class="ruler" aria-label="Severity counts">
+            <div class="ruler-col crit"><span>Critical</span><b>3</b><i></i></div>
+            <div class="ruler-col warn"><span>Warning</span><b>9</b><i></i></div>
+            <div class="ruler-col ok"><span>Optimized</span><b>28</b><i></i></div>
+          </div>
+          <div class="spine" style="margin-top:18px">
+            <div class="issue critical"><span class="sev">Critical</span><div><strong>Homepage LCP 4.8s</strong><p>Hero image unsized. Render-blocking font CSS on the first view.</p></div></div>
+            <div class="issue critical"><span class="sev">Critical</span><div><strong>Canonical host mismatch · 9 URLs</strong><p>http and a www twin are both being treated as canonical.</p></div></div>
+            <div class="issue critical"><span class="sev">Critical</span><div><strong>robots.txt disagrees with the sitemap</strong><p>/beaches/kashid is disallowed and listed. Crawlers are being given two stories.</p></div></div>
+          </div>
+          <p style="margin-top:16px"><a class="link" href="#/audit">Open the full diagnostic</a></p>
+        </section>
+      </section>
+
+      <section class="panel" id="panel-audit">
+        <div class="block-head" style="padding-top:28px">
+          <div>
+            <p class="kicker">02 — Website audit</p>
+            <h2>A colder light on the host.</h2>
+          </div>
+          <p class="block-note">Vertical diagnostic of revdandatourism.com. Severity is a label, not a color performance. 28 checks passed; 8 material optimized items are listed.</p>
+        </div>
+        <div class="vitals">
+          <div class="vital"><span class="kicker">LCP · home</span><b style="color:var(--clay)">4.8s</b><span class="sev" style="color:var(--clay)">Critical</span></div>
+          <div class="vital"><span class="kicker">CLS · home</span><b>0.04</b><span class="sev" style="color:var(--lime)">Optimized</span></div>
+          <div class="vital"><span class="kicker">INP · gallery</span><b style="color:var(--sand)">240ms</b><span class="sev" style="color:var(--sand)">Warning</span></div>
+        </div>
+        <div class="statgrid">
+          <div class="stat"><b>186</b><span>URLs crawled</span></div>
+          <div class="stat"><b>141</b><span>Indexable</span></div>
+          <div class="stat"><b>128</b><span>With a single H1</span></div>
+          <div class="stat"><b>22</b><span>Missing meta descriptions</span></div>
+          <div class="stat"><b>46</b><span>Median title length</span></div>
+          <div class="stat"><b>9</b><span>Canonical conflicts</span></div>
+        </div>
+        <div class="spine">
+          <div class="spine-group">Crawl</div>
+          <div class="issue critical"><span class="sev">Critical</span><div><strong>robots.txt disallows /beaches/kashid</strong><p>The sitemap includes the URL. One of these files is wrong. Until they agree, the beach cluster cannot be trusted.</p></div></div>
+          <div class="issue warning"><span class="sev">Warning</span><div><strong>Sitemap lastmod is 112 days stale</strong><p>Fresh guides will look unchanged to anything honoring lastmod.</p></div></div>
+          <div class="spine-group">Index</div>
+          <div class="issue critical"><span class="sev">Critical</span><div><strong>Canonical host mismatch on 9 URLs</strong><p>Mix of http and a www twin. Equity and new content will split until one host is declared.</p></div></div>
+          <div class="issue optimized"><span class="sev">Optimized</span><div><strong>XML sitemap present and reachable</strong><p>200, referenced from robots.txt, 141 indexable URLs listed.</p></div></div>
+          <div class="issue optimized"><span class="sev">Optimized</span><div><strong>Custom 404 returns 404</strong><p>Not a soft 200. Useful, and rarer than it should be.</p></div></div>
+          <div class="spine-group">Performance</div>
+          <div class="issue critical"><span class="sev">Critical</span><div><strong>Homepage LCP 4.8s</strong><p>Hero image has no dimensions and no priority. Font CSS blocks first paint.</p></div></div>
+          <div class="issue warning"><span class="sev">Warning</span><div><strong>INP 240ms on the gallery template</strong><p>Main-thread work on image swap. Not fatal. Not fine.</p></div></div>
+          <div class="issue warning"><span class="sev">Warning</span><div><strong>14 images missing width and height</strong><p>Layout shift is currently contained. It will not stay contained if the hero pattern spreads.</p></div></div>
+          <div class="issue optimized"><span class="sev">Optimized</span><div><strong>CLS 0.04 on the homepage</strong><p>Within the good threshold. Keep it there when the hero is fixed.</p></div></div>
+          <div class="spine-group">On-page</div>
+          <div class="issue warning"><span class="sev">Warning</span><div><strong>22 indexable URLs missing meta descriptions</strong><p>Snippets are being written by the SERP, not by the site.</p></div></div>
+          <div class="issue warning"><span class="sev">Warning</span><div><strong>Fort page has two H1 elements</strong><p>The stronger URL on the host is the one with the muddiest outline.</p></div></div>
+          <div class="issue warning"><span class="sev">Warning</span><div><strong>Title duplication across 6 beach URLs</strong><p>They collapse into one another in search and in AI summaries.</p></div></div>
+          <div class="issue warning"><span class="sev">Warning</span><div><strong>FAQ on ferry timings is under 40 words</strong><p>The question is asked. The page declines to answer it.</p></div></div>
+          <div class="issue optimized"><span class="sev">Optimized</span><div><strong>H1 present on 128 of 141 indexable URLs</strong><p>The misses are utility templates, not guides.</p></div></div>
+          <div class="spine-group">Structure</div>
+          <div class="issue warning"><span class="sev">Warning</span><div><strong>Stays section is an orphan</strong><p>Zero inlinks from guides. The commercial pages cannot inherit the fort’s retrieval.</p></div></div>
+          <div class="issue warning"><span class="sev">Warning</span><div><strong>No page for the Marathi query cluster</strong><p><span lang="mr">रेवदंडा किल्ला</span> and <span lang="mr">रेवदंडा बीच</span> have no corresponding URL.</p></div></div>
+          <div class="issue optimized"><span class="sev">Optimized</span><div><strong>HTTPS on the preferred host</strong><p>No mixed content detected on indexable templates.</p></div></div>
+          <div class="issue optimized"><span class="sev">Optimized</span><div><strong>Mobile viewport is set</strong><p>Tap targets on the nav are adequate. Gallery captions are small, not broken.</p></div></div>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-keywords">
+        <div class="block-head" style="padding-top:28px">
+          <div>
+            <p class="kicker">03 — Keyword intelligence</p>
+            <h2>The term table.</h2>
+          </div>
+          <p class="block-note">Fifteen terms from the tracked set, held where you can sort them. Press / to filter. Opportunity is a judgment: volume, weakness of the current owner, and whether the business can serve the intent.</p>
+        </div>
+        <div class="kw-tools">
+          <div class="chips">
+            <button class="chip on" type="button" data-filter="all">All</button>
+            <button class="chip" type="button" data-filter="high">High opportunity</button>
+            <button class="chip" type="button" data-filter="info">Informational</button>
+            <button class="chip" type="button" data-filter="trans">Transactional</button>
+            <button class="chip" type="button" data-filter="local">Local</button>
+          </div>
+          <div>
+            <label class="vh" for="kw-search">Filter terms</label>
+            <input class="search" id="kw-search" type="search" placeholder="Filter terms" autocomplete="off">
+          </div>
+        </div>
+        <p class="kicker kw-count">15 terms in view</p>
+        <div id="kw-plot-slot" style="margin:12px 0 22px"></div>
+        <div class="table-scroll">
+          <table class="grid-table" id="kw-table">
+            <caption class="vh">Tracked keywords for Revdanda Tourism</caption>
+            <thead>
+              <tr>
+                <th data-sort="q">Term</th>
+                <th data-sort="intent">Intent</th>
+                <th data-sort="vol" class="numr">Volume</th>
+                <th data-sort="diff" class="numr">Difficulty</th>
+                <th>Relevance</th>
+                <th data-sort="score" class="numr">Opportunity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="kw-row" data-q="murud janjira fort" data-intent="info" data-opp="high" data-vol="5400" data-diff="22" data-score="91"><td>murud janjira fort</td><td>Informational</td><td class="numr">5,400</td><td class="numr">22</td><td><span class="rels" aria-label="5 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td class="numr"><span class="obar"><i style="width:91%"></i></span>91</td></tr>
+              <tr class="kw-row" data-q="quiet beaches near mumbai" data-intent="info" data-opp="high" data-vol="4800" data-diff="36" data-score="88"><td>quiet beaches near mumbai</td><td>Informational</td><td class="numr">4,800</td><td class="numr">36</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td class="numr"><span class="obar"><i style="width:88%"></i></span>88</td></tr>
+              <tr class="kw-row" data-q="revdanda homestay" data-intent="trans" data-opp="high" data-vol="640" data-diff="11" data-score="86"><td>revdanda homestay</td><td>Transactional</td><td class="numr">640</td><td class="numr">11</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td class="numr"><span class="obar"><i style="width:86%"></i></span>86</td></tr>
+              <tr class="kw-row" data-q="revdanda beach resorts" data-intent="trans" data-opp="high" data-vol="2400" data-diff="27" data-score="84"><td>revdanda beach resorts</td><td>Transactional</td><td class="numr">2,400</td><td class="numr">27</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td class="numr"><span class="obar"><i style="width:84%"></i></span>84</td></tr>
+              <tr class="kw-row" data-q="mumbai to revdanda" data-intent="nav" data-opp="high" data-vol="3600" data-diff="31" data-score="80"><td>mumbai to revdanda</td><td>Navigational</td><td class="numr">3,600</td><td class="numr">31</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td class="numr"><span class="obar"><i style="width:80%"></i></span>80</td></tr>
+              <tr class="kw-row" data-q="revdanda beach" data-intent="info" data-opp="mid" data-vol="2900" data-diff="18" data-score="78"><td>revdanda beach</td><td>Informational</td><td class="numr">2,900</td><td class="numr">18</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td class="numr"><span class="obar"><i style="width:78%"></i></span>78</td></tr>
+              <tr class="kw-row" data-q="how to reach murud from mumbai" data-intent="info" data-opp="mid" data-vol="3200" data-diff="24" data-score="76"><td>how to reach murud from mumbai</td><td>Informational</td><td class="numr">3,200</td><td class="numr">24</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td class="numr"><span class="obar"><i style="width:76%"></i></span>76</td></tr>
+              <tr class="kw-row" data-q="revdanda fort timings" data-intent="info" data-opp="mid" data-vol="880" data-diff="9" data-score="74"><td>revdanda fort timings</td><td>Informational</td><td class="numr">880</td><td class="numr">9</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td class="numr"><span class="obar"><i style="width:74%"></i></span>74</td></tr>
+              <tr class="kw-row" data-q="alibaug weekend getaway" data-intent="trans" data-opp="mid" data-vol="8100" data-diff="47" data-score="70"><td>alibaug weekend getaway</td><td>Transactional</td><td class="numr">8,100</td><td class="numr">47</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td class="numr"><span class="obar"><i style="width:70%"></i></span>70</td></tr>
+              <tr class="kw-row" data-q="best beaches near alibaug" data-intent="info" data-opp="mid" data-vol="12100" data-diff="54" data-score="64"><td>best beaches near alibaug</td><td>Informational</td><td class="numr">12,100</td><td class="numr">54</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td class="numr"><span class="obar"><i style="width:64%"></i></span>64</td></tr>
+              <tr class="kw-row" data-q="kashid beach vs revdanda" data-intent="comp" data-opp="mid" data-vol="510" data-diff="16" data-score="63"><td>kashid beach vs revdanda</td><td>Comparison</td><td class="numr">510</td><td class="numr">16</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td class="numr"><span class="obar"><i style="width:63%"></i></span>63</td></tr>
+              <tr class="kw-row" data-q="konkan coastal tourism" data-intent="info" data-opp="mid" data-vol="1900" data-diff="29" data-score="58"><td>konkan coastal tourism</td><td>Informational</td><td class="numr">1,900</td><td class="numr">29</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td class="numr"><span class="obar"><i style="width:58%"></i></span>58</td></tr>
+              <tr class="kw-row" data-q="seafood restaurants revdanda" data-intent="local" data-opp="mid" data-vol="720" data-diff="14" data-score="57"><td>seafood restaurants revdanda</td><td>Local</td><td class="numr">720</td><td class="numr">14</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td class="numr"><span class="obar"><i style="width:57%"></i></span>57</td></tr>
+              <tr class="kw-row" data-q="monsoon trip konkan" data-intent="info" data-opp="mid" data-vol="4400" data-diff="41" data-score="52"><td>monsoon trip konkan</td><td>Informational</td><td class="numr">4,400</td><td class="numr">41</td><td><span class="rels"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td><td class="numr"><span class="obar"><i style="width:52%"></i></span>52</td></tr>
+              <tr class="kw-row" data-q="alibaug resorts price" data-intent="trans" data-opp="low" data-vol="6600" data-diff="63" data-score="34"><td>alibaug resorts price</td><td>Transactional</td><td class="numr">6,600</td><td class="numr">63</td><td><span class="rels"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></td><td class="numr"><span class="obar"><i style="width:34%"></i></span>34</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="footnote">Relevance is five squares: can this business actually satisfy the click. A high-volume term with two squares is not an opportunity. It is someone else’s market.</p>
+      </section>
+
+      <section class="panel" id="panel-competitors">
+        <div class="block-head" style="padding-top:28px">
+          <div>
+            <p class="kicker">04 — Competitor intelligence</p>
+            <h2>Who already owns the sentence.</h2>
+          </div>
+          <p class="block-note">A signal grid, not a rank chart. Filled marks mean the host publishes a page that answers the term. Lime is you. Sand is partial. Empty is the gap.</p>
+        </div>
+        <div class="table-scroll">
+          <table class="grid-table">
+            <caption class="vh">Keyword ownership across competitors</caption>
+            <thead>
+              <tr>
+                <th>Term</th><th>You</th><th>Alibaug Tourism</th><th>Konkan Guide</th><th>MTDC</th><th>Beach Escape</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>murud janjira fort</td><td class="part">Partial</td><td>Owns</td><td>Owns</td><td>Owns</td><td class="miss">—</td></tr>
+              <tr><td>quiet beaches near mumbai</td><td class="miss">—</td><td>Owns</td><td>Owns</td><td class="miss">—</td><td>Owns</td></tr>
+              <tr><td>revdanda homestay</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="part">Partial</td></tr>
+              <tr><td>revdanda beach resorts</td><td class="miss">—</td><td class="part">Partial</td><td class="miss">—</td><td class="miss">—</td><td>Owns</td></tr>
+              <tr><td>mumbai to revdanda</td><td class="own">Owns</td><td class="part">Partial</td><td>Owns</td><td class="part">Partial</td><td class="miss">—</td></tr>
+              <tr><td>revdanda fort timings</td><td class="miss">—</td><td class="miss">—</td><td>Owns</td><td class="miss">—</td><td class="miss">—</td></tr>
+              <tr><td>best beaches near alibaug</td><td class="miss">—</td><td>Owns</td><td>Owns</td><td class="miss">—</td><td>Owns</td></tr>
+              <tr><td>seafood restaurants revdanda</td><td class="miss">—</td><td class="miss">—</td><td class="part">Partial</td><td class="miss">—</td><td>Owns</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="footnote">The only term this host fully owns in the set is the road to itself. Everything a traveler asks next is published by someone else, or by no one. The second case is the opportunity. The first case is the lesson.</p>
+      </section>
+
+      <section class="panel" id="panel-ai">
+        <div class="block-head" style="padding-top:28px">
+          <div>
+            <p class="kicker">05 — Workspace</p>
+            <h2>Citation, not mention.</h2>
+          </div>
+          <p class="block-note">Forty archived prompts. The field below is the same instrument as the overview, held still so one answer can be read at a time.</p>
+        </div>
+        <div class="statgrid" style="margin-bottom:22px">
+          <div class="stat"><b>23</b><span>Answers that mention the place</span></div>
+          <div class="stat"><b>5</b><span>Answers that cite the domain</span></div>
+          <div class="stat"><b>17</b><span>Answers where the place is absent</span></div>
+        </div>
+        <div id="ai-mount"></div>
+      </section>
+
+      <section class="panel" id="panel-gaps">
+        <div class="block-head" style="padding-top:28px">
+          <div>
+            <p class="kicker">06 — Content gaps</p>
+            <h2>Topics the market already believes.</h2>
+          </div>
+          <p class="block-note">Coverage is how many of the four competitors publish the topic. Priority is whether a traveler from Mumbai would miss it.</p>
+        </div>
+        <div class="gap-head" style="display:grid;grid-template-columns:1.4fr .6fr .6fr .7fr 52px;gap:8px;padding-bottom:8px" aria-hidden="true">
+          <span class="kicker">Topic</span><span class="kicker">Them</span><span class="kicker">You</span><span class="kicker">Intent</span><span class="kicker">Pri</span>
+        </div>
+        <article>
+          <button class="gap-toggle" type="button" aria-expanded="false"><span>Mumbai–coast itineraries, 1 day and 2 day</span><span>4/4</span><span>None</span><span>Transactional</span><span class="pri">96</span></button>
+          <div class="gap-body" hidden><p>This is the journey the competitors sell and this site names. Without a route, the fort page is a postcard.</p></div>
+        </article>
+        <article>
+          <button class="gap-toggle" type="button" aria-expanded="false"><span>Where to stay in Revdanda</span><span>3/4</span><span>None</span><span>Transactional</span><span class="pri">93</span></button>
+          <div class="gap-body" hidden><p>Stay intent is being answered by Alibaug properties. A local cluster would change both search and the AI booking suggestion.</p></div>
+        </article>
+        <article>
+          <button class="gap-toggle" type="button" aria-expanded="false"><span>Kashid, Alibaug, Revdanda, Murud — compared</span><span>4/4</span><span>None</span><span>Comparison</span><span class="pri">88</span></button>
+          <div class="gap-body" hidden><p>Every rival has a version. None of them are fair to Revdanda, because none of them need to be. This host does.</p></div>
+        </article>
+        <article>
+          <button class="gap-toggle" type="button" aria-expanded="false"><span>Quiet beaches near Mumbai</span><span>3/4</span><span>None</span><span>Informational</span><span class="pri">86</span></button>
+          <div class="gap-body" hidden><p>This is the prompt archived answers actually satisfy. Absence here is absence from the new shelf.</p></div>
+        </article>
+        <article>
+          <button class="gap-toggle" type="button" aria-expanded="false"><span>Monsoon travel on the Konkan</span><span>3/4</span><span>None</span><span>Informational</span><span class="pri">71</span></button>
+          <div class="gap-body" hidden><p>Seasonal demand with a safety and expectation problem. A precise page outperforms a weather widget.</p></div>
+        </article>
+        <article>
+          <button class="gap-toggle" type="button" aria-expanded="false"><span>Seafood and local meals</span><span>2/4</span><span>Partial</span><span>Local</span><span class="pri">68</span></button>
+          <div class="gap-body" hidden><p>A paragraph exists. A trail — where, when, what to skip — does not. Local intent is how a place becomes a plan.</p></div>
+        </article>
+        <article>
+          <button class="gap-toggle" type="button" aria-expanded="false"><span>Fort history, beyond a paragraph</span><span>2/4</span><span>Partial</span><span>Informational</span><span class="pri">64</span></button>
+          <div class="gap-body" hidden><p>The history page is the one URL archived answers already cite. Depth here is how citation becomes a habit.</p></div>
+        </article>
+        <article>
+          <button class="gap-toggle" type="button" aria-expanded="false"><span>Marathi cluster · <span lang="mr">रेवदंडा किल्ला</span></span><span>1/4</span><span>None</span><span>Informational</span><span class="pri">60</span></button>
+          <div class="gap-body" hidden><p>The catchment is not only English-language Mumbai. One careful page is a gap almost nobody in the set has closed.</p></div>
+        </article>
+        <article>
+          <button class="gap-toggle" type="button" aria-expanded="false"><span>Family versus couple framing</span><span>3/4</span><span>None</span><span>Informational</span><span class="pri">58</span></button>
+          <div class="gap-body" hidden><p>Rivals segment the weekend. This site speaks to a generic visitor. Segmentation is a content gap, not a branding exercise.</p></div>
+        </article>
+      </section>
+
+      <section class="panel" id="panel-linking">
+        <div class="block-head" style="padding-top:28px">
+          <div>
+            <p class="kicker">07 — Internal linking</p>
+            <h2>Pages that never introduce each other.</h2>
+          </div>
+          <p class="block-note">Solid lines exist. Dashed lime lines are the introductions worth making. The ghost node is a page that should exist and does not.</p>
+        </div>
+        <div class="link-layout">
+          <div class="linkmap" id="linkmap">
+            <svg viewBox="0 0 680 360" aria-hidden="true">
+              <line class="lline" x1="90" y1="60" x2="90" y2="160"/>
+              <line class="lline" x1="90" y1="60" x2="250" y2="160"/>
+              <line class="lline" x1="90" y1="60" x2="410" y2="160"/>
+              <line class="lline" x1="90" y1="60" x2="90" y2="280"/>
+              <line class="lline" x1="250" y1="160" x2="410" y2="160"/>
+              <line class="lline" x1="90" y1="160" x2="90" y2="280"/>
+              <line class="lline suggest" data-link="fort-stays" x1="250" y1="160" x2="250" y2="280"/>
+              <line class="lline suggest" data-link="beaches-stays" x1="90" y1="160" x2="250" y2="280"/>
+              <line class="lline suggest" data-link="reach-plan" x1="410" y1="160" x2="410" y2="280"/>
+              <line class="lline suggest" data-link="home-murud" x1="90" y1="60" x2="560" y2="220"/>
+              <line class="lline suggest" data-link="stays-plan" x1="250" y1="280" x2="410" y2="280"/>
+            </svg>
+            <span class="pnode" style="left:13.24%;top:16.67%">Home</span>
+            <span class="pnode" style="left:13.24%;top:44.44%">Beaches</span>
+            <span class="pnode" style="left:13.24%;top:77.78%">Food</span>
+            <span class="pnode" style="left:36.76%;top:44.44%">Fort</span>
+            <span class="pnode" style="left:36.76%;top:77.78%">Stays</span>
+            <span class="pnode" style="left:60.29%;top:44.44%">How to reach</span>
+            <span class="pnode" style="left:60.29%;top:77.78%">Plan</span>
+            <span class="pnode ghost" style="left:82.35%;top:61.11%">Murud guide · missing</span>
+          </div>
+          <div>
+            <p class="kicker">Suggested introductions</p>
+            <button class="suggest-btn" type="button" data-link="fort-stays"><strong>Fort → Stays</strong><span>Anchor: “Where to stay after the fort.” The ranking page currently dead-ends.</span></button>
+            <button class="suggest-btn" type="button" data-link="beaches-stays"><strong>Beaches → Stays</strong><span>Anchor: “Homestays on this beach.” Connects the only local commercial intent.</span></button>
+            <button class="suggest-btn" type="button" data-link="reach-plan"><strong>How to reach → Plan</strong><span>Anchor: “A two-day version of this road.” Turns a direction into a journey.</span></button>
+            <button class="suggest-btn" type="button" data-link="home-murud"><strong>Home → Murud guide</strong><span>The target page does not exist. The link is a brief for Content Gaps, not a href to invent.</span></button>
+            <button class="suggest-btn" type="button" data-link="stays-plan"><strong>Stays → Plan</strong><span>Anchor: “Build the weekend around a bed, not a list.”</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-actions">
+        <div class="block-head" style="padding-top:28px">
+          <div>
+            <p class="kicker">08 — SEO recommendations</p>
+            <h2>Sequence, then write.</h2>
+          </div>
+          <p class="block-note">Do the week before the quarter. Indexation first, then the page that can be cited, then the cluster that can convert. Impact totals are a reading, not a promise.</p>
+        </div>
+        <div class="seq">
+          <div class="seq-col">
+            <header><span>This week</span><b>178</b></header>
+            <div class="seq-item"><div><strong>Coastal guide</strong><em>Impact 92 · Content</em></div><button class="btn small queue-btn" type="button" data-id="a1">Add to queue</button></div>
+            <div class="seq-item"><div><strong>Canonical host</strong><em>Impact 86 · Technical</em></div><button class="btn small queue-btn" type="button" data-id="a2">Add to queue</button></div>
+          </div>
+          <div class="seq-col">
+            <header><span>This month</span><b>155</b></header>
+            <div class="seq-item"><div><strong>Quiet-beach citation</strong><em>Impact 81 · AI visibility</em></div><button class="btn small queue-btn" type="button" data-id="a3">Add to queue</button></div>
+            <div class="seq-item"><div><strong>Fort to stays and food</strong><em>Impact 74 · Links</em></div><button class="btn small queue-btn" type="button" data-id="a4">Add to queue</button></div>
+          </div>
+          <div class="seq-col">
+            <header><span>This quarter</span><b>134</b></header>
+            <div class="seq-item"><div><strong>Homestay cluster</strong><em>Impact 70 · Keyword</em></div><button class="btn small queue-btn" type="button" data-id="a5">Add to queue</button></div>
+            <div class="seq-item"><div><strong>Four-beach comparison</strong><em>Impact 64 · Content</em></div><button class="btn small queue-btn" type="button" data-id="a6">Add to queue</button></div>
+          </div>
+        </div>
+        <p class="footnote">Rationale for each action sits on Overview. Queuing here and there is the same list — stored in this browser only.</p>
+      </section>
+
+      <section class="panel" id="panel-reports">
+        <div class="block-head" style="padding-top:28px">
+          <div>
+            <p class="kicker">09 — Reports</p>
+            <h2>A reading you can hand to someone.</h2>
+          </div>
+          <p class="block-note no-print">The sheet is the report. Download keeps the argument. Print keeps the page.</p>
+        </div>
+        <div class="hero-actions no-print" style="margin-bottom:18px">
+          <button class="btn small" type="button" id="download-report">Download report</button>
+          <button class="btn ghost small" type="button" id="print-report">Print report</button>
+        </div>
+        <div class="report-layout">
+          <nav class="report-index" aria-label="Report sections">
+            <a href="#r-exec" class="on">Executive summary</a>
+            <a href="#r-health">SEO health</a>
+            <a href="#r-kw">Keyword opportunities</a>
+            <a href="#r-comp">Competitor gaps</a>
+            <a href="#r-ai">AI visibility</a>
+            <a href="#r-content">Content opportunities</a>
+            <a href="#r-tech">Technical issues</a>
+            <a href="#r-act">Recommended actions</a>
+          </nav>
+          <article class="sheet" id="sheet">
+            <div class="sheet-top">
+              <div>
+                <div class="wordmark">SEO<span class="comma">,</span> INTELLIGENCE</div>
+                <p class="kicker" style="margin-top:12px">Project reading · Confidential to the project · 26 Sep 2026</p>
+                <h2 style="margin-top:10px">Revdanda Tourism</h2>
+                <p>revdandatourism.com · Intelligence score 82 / 100 · Confidence 0.86</p>
+              </div>
+              <div class="steel" style="font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;text-align:right">01 — 08<br>Demonstration dataset</div>
+            </div>
+            <h2 id="r-exec">Executive summary</h2>
+            <p>Revdanda Tourism is visible for its own name and its fort, and nearly invisible for the demand that actually moves weekends. The intelligence score is 82 because the technical base is mostly sound and on-page intent is clear — not because the market is won. The gap is coverage. Competitors publish the journey: Mumbai, coast, fort, stay, food. This site publishes the place. Archived AI answers mention the coast and rarely cite the domain. The next quarter is a publishing and citation problem, not a redesign.</p>
+            <h2 id="r-health">SEO health</h2>
+            <p>Score 82 / 100. Technical 78. Content 84. Authority 71. AI presence 69. On-page 91. Authority and AI presence are the open pillars. Organic visibility across tracked queries is 64.2, up 4.2 points in this reading. Seventeen technical issues remain open, three of them critical.</p>
+            <h2 id="r-kw">Keyword opportunities</h2>
+            <ul>
+              <li>Murud Janjira fort — difficulty 22, volume 5.4k, opportunity 91. Own the day, not only the name.</li>
+              <li>Quiet beaches near Mumbai — opportunity 88. The prompt AI answers. This domain is not sourced.</li>
+              <li>Revdanda homestay — difficulty 11, no indexable URL.</li>
+              <li>Revdanda beach resorts — opportunity 84, commercial intent, weak local owner.</li>
+              <li>Mumbai to Revdanda — already partly owned. Extend it into a two-day plan.</li>
+            </ul>
+            <h2 id="r-comp">Competitor gaps</h2>
+            <p>Alibaug Tourism holds the widest keyword gap (34). Konkan Guide wins thin informational guides, including fort timings. MTDC holds institutional links that cannot be copied and can still be earned as citations. Beach Escape holds the commercial stay intent aimed at the same Mumbai weekend. This host fully owns, in the compared set, the road to itself.</p>
+            <h2 id="r-ai">AI visibility</h2>
+            <p>40 archived prompts. 23 mention the place or the brand. 5 cite the domain. 17 do not mention Revdanda at all. The useful distinction is between being a clause in an answer and being a source under it. History of the fort is the cited case. Quiet weekends, seafood, and family fort trips are not.</p>
+            <h2 id="r-content">Content opportunities</h2>
+            <p>Highest priorities: a Mumbai–coast itinerary (priority 96), a stay hub (93), a four-place comparison (88), and a quiet-beaches page written to be cited (86). A Marathi page for <span lang="mr">रेवदंडा किल्ला</span> is a smaller gap almost none of the set has closed.</p>
+            <h2 id="r-tech">Technical issues</h2>
+            <ul>
+              <li>Critical — Homepage LCP 4.8s.</li>
+              <li>Critical — Canonical host mismatch on 9 URLs.</li>
+              <li>Critical — robots.txt disallows a URL the sitemap includes.</li>
+              <li>Warning — stale sitemap lastmod, missing metas, duplicate titles, orphan stays, thin ferry FAQ, INP 240ms.</li>
+              <li>Optimized — HTTPS, sitemap present, real 404, viewport, CLS 0.04, H1 on 128 URLs.</li>
+            </ul>
+            <h2 id="r-act">Recommended actions</h2>
+            <ol>
+              <li>Repair the canonical host and the robots/sitemap conflict before new URLs.</li>
+              <li>Publish the Murud–Revdanda coastal guide and link it from the fort page.</li>
+              <li>Write the quiet-beach page as a source: distances, months, crowds, ferry notes.</li>
+              <li>Open the homestay cluster. Connect fort, beaches, stays, and food.</li>
+              <li>Publish the comparison. Then the Marathi page.</li>
+            </ol>
+            <p style="margin-top:28px">Prepared as a project reading · 26 Sep 2026 · SEO, INTELLIGENCE. Figures are a structured demonstration dataset for revdandatourism.com. They are internally consistent. They are not a live crawl of a third-party index, and they are not a ranking guarantee.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-settings">
+        <div class="block-head" style="padding-top:28px">
+          <div>
+            <p class="kicker">System</p>
+            <h2>How this project watches.</h2>
+          </div>
+          <p class="block-note">Stored in this browser only. Nothing is sent anywhere. This build does not crawl the live web.</p>
+        </div>
+        <form id="settings-form" class="form-grid">
+          <label><span>Project name</span><input type="text" name="project" value="Revdanda Tourism"></label>
+          <label><span>Domain</span><input type="text" name="domain" value="revdandatourism.com"></label>
+          <label class="full"><span>Competitors</span><textarea name="competitors">alibaugtourism.org
+konkanguide.in
+maharashtratourism.gov.in
+beachescape.co</textarea></label>
+          <label><span>AI sample size</span>
+            <select name="sample">
+              <option>20 prompts</option>
+              <option selected>40 prompts</option>
+              <option>80 prompts</option>
+            </select>
+          </label>
+          <label><span>Market</span><input type="text" name="market" value="Weekend leisure · Mumbai catchment"></label>
+          <label class="full check"><input type="checkbox" name="flag" checked> Show the demonstration-reading label in the top bar</label>
+          <div class="form-actions full">
+            <button class="btn small" type="submit">Save settings</button>
+            <button class="btn ghost small" type="button" id="reset-settings">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" id="panel-project">
+        <div class="block-head" style="padding-top:28px">
+          <div>
+            <p class="kicker">Project · Revdanda, Raigad</p>
+            <h2>One coast, read properly.</h2>
+          </div>
+          <p class="block-note">18.53°N · 72.93°E. A final-year B.Tech interface for an intelligence layer — performance, demand, competitor gaps, and machine answers — argued through a single real place.</p>
+        </div>
+        <div class="statgrid">
+          <div class="stat"><b>186</b><span>URLs in the reading</span></div>
+          <div class="stat"><b>141</b><span>Indexable</span></div>
+          <div class="stat"><b>640</b><span>Terms tracked</span></div>
+          <div class="stat"><b>4</b><span>Competitors</span></div>
+          <div class="stat"><b>40</b><span>AI answers archived</span></div>
+          <div class="stat"><b>82</b><span>Intelligence score</span></div>
+        </div>
+        <div class="block" style="max-width:68ch">
+          <h3>What this is</h3>
+          <p class="muted">A product interface for seeing what a rank tracker flattens: where the site is retrieved, where rivals already published the journey, and whether answer engines cite the domain or merely mention the coast.</p>
+          <h3 style="margin-top:22px">What this build is not</h3>
+          <p class="muted">Not a live connector to Search Console. Not a crawler running in the browser. Not a fabricated score for arbitrary domains. Entering another website in Run Analysis will not invent metrics. The complete reading shipped here is revdandatourism.com, dated 26 Sep 2026.</p>
+          <h3 style="margin-top:22px">Market</h3>
+          <p class="muted">Weekend leisure from Mumbai. Neighbors in the traveler’s mind: Alibaug, Kashid, Murud-Janjira, Chaul and Korlai. Languages in scope: English, and a partial Marathi cluster that is currently uncovered.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="modal-back" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <p class="kicker">Run a fresh reading</p>
+    <h2 id="modal-title">Analyze a website</h2>
+    <p>This build ships with one complete reading. It will walk the stages for revdandatourism.com and will not invent a score for a different domain.</p>
+    <form id="analyze-form">
+      <label><span>Domain</span><input id="analyze-url" type="text" name="url" value="revdandatourism.com" autocomplete="off" spellcheck="false"></label>
+      <p class="note" id="analyze-note"></p>
+      <ol class="stages" id="stages" hidden></ol>
+      <div class="modal-actions">
+        <button class="btn small" type="submit" id="analyze-go">Run Analysis</button>
+        <button class="btn ghost small" type="button" id="modal-close">Close</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  const labels = {
+    overview: "Overview",
+    audit: "Website Audit",
+    keywords: "Keyword Intelligence",
+    competitors: "Competitor Intelligence",
+    ai: "AI Search Visibility",
+    gaps: "Content Gaps",
+    linking: "Internal Linking",
+    actions: "SEO Recommendations",
+    reports: "Reports",
+    settings: "Settings",
+    project: "Project"
+  };
+  const panels = Object.fromEntries(Object.keys(labels).map(function (k) {
+    return [k, document.getElementById("panel-" + k)];
+  }));
+
+  const SAMPLES = [
+    {
+      mention: true, cite: false,
+      answer: "For a quiet weekend, the usual suggestions are Alibaug for stays, Kashid for a longer beach, and Murud if you want the fort and fewer shops. Revdanda sits between them, with a smaller fort and a long beach, but the booking is sent to Alibaug properties. The place is named in passing. The domain is not the source.",
+      sources: "Sources in this answer: alibaugtourism.org · a weekend guide · MTDC"
+    },
+    {
+      mention: true, cite: true,
+      answer: "Revdanda Fort sits on the wider Chaul and Korlai coastline, later marked by Portuguese-era traces. A short page on this domain already answers the name, a brief history, and timings — and in this archived sample it is cited. The citation is narrow. History, not the weekend.",
+      sources: "Sources in this answer: revdandatourism.com · a district history note · Konkan Guide"
+    },
+    {
+      mention: false, cite: false,
+      answer: "Answers drift toward Alibaug and a handful of well-published beach shacks. Revdanda’s meals are absent. The brand is not named. The domain is not cited. A food trail would be a new node, not a rewrite.",
+      sources: "Sources in this answer: two Alibaug lists · a city magazine. Domain absent."
+    },
+    {
+      mention: true, cite: false,
+      answer: "Alibaug wins the answer because more stay pages exist. Revdanda appears as the quieter, less documented clause. A competitor is cited for the comparison. This host is mentioned and not sourced.",
+      sources: "Sources in this answer: alibaugtourism.org · Beach Escape. Domain not cited."
+    },
+    {
+      mention: false, cite: false,
+      answer: "Murud-Janjira dominates family fort trips from Mumbai. Revdanda is not in the answer. The road that connects them is undescribed — which is exactly the guide sitting at the top of the action queue.",
+      sources: "Sources in this answer: MTDC · Konkan Guide. Place absent."
+    }
+  ];
+
+  const readouts = {
+    website: "Subject. 186 URLs on one host. The map starts here, not at a rank.",
+    search: "Traditional results. Where the site is retrieved, and where it is only adjacent.",
+    ai: "Answer engines. Mention is not citation. Citation is the new shelf.",
+    competitors: "Four properties already publishing the journeys this site names but does not explain.",
+    opportunities: "Demand with a weak owner. The only part of the map that should grow.",
+    queries: "The demand layer between the engine and the answer. 640 terms in this reading."
+  };
+
+  let kwFilter = "all";
+  let kwQuery = "";
+  let sortState = { key: "score", dir: -1 };
+  let toastTimer = null;
+  let runTimers = [];
+  let queue = new Set();
+
+  function store(key, value) {
+    try { localStorage.setItem(key, value); } catch (e) {}
+  }
+  function read(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  }
+  try { queue = new Set(JSON.parse(read("si-queue") || "[]")); } catch (e) { queue = new Set(); }
+
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove("show"); }, 2800);
+  }
+
+  function closeNav() {
+    document.getElementById("sidebar").classList.remove("open");
+    document.getElementById("scrim").classList.remove("show");
+    const btn = document.getElementById("menu-btn");
+    if (btn) btn.setAttribute("aria-expanded", "false");
+  }
+  function openNav() {
+    document.getElementById("sidebar").classList.add("open");
+    document.getElementById("scrim").classList.add("show");
+    document.getElementById("menu-btn").setAttribute("aria-expanded", "true");
+  }
+
+  function showLanding() {
+    document.body.classList.remove("app-mode");
+    document.documentElement.classList.remove("boot-app");
+    document.title = "SEO, INTELLIGENCE — See what search can't show you";
+    closeNav();
+    window.scrollTo(0, 0);
+  }
+  function setPanel(name) {
+    if (!panels[name]) name = "overview";
+    Object.keys(panels).forEach(function (k) {
+      panels[k].classList.toggle("active", k === name);
+    });
+    document.querySelectorAll(".nav a").forEach(function (a) {
+      const on = a.dataset.panel === name;
+      a.classList.toggle("active", on);
+      if (on) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    document.getElementById("top-title").textContent = labels[name];
+    document.title = "SEO, INTELLIGENCE — " + labels[name];
+    document.getElementById("main").scrollTop = 0;
+    closeNav();
+  }
+  function showApp(name) {
+    document.body.classList.add("app-mode");
+    document.documentElement.classList.add("boot-app");
+    setPanel(name);
+  }
+  function route() {
+    const raw = (location.hash || "").replace(/^#\//, "");
+    if (!raw || raw === "landing") showLanding();
+    else showApp(raw);
+  }
+
+  function renderQueue() {
+    document.querySelectorAll(".queue-btn").forEach(function (btn) {
+      const on = queue.has(btn.dataset.id);
+      btn.classList.toggle("is-queued", on);
+      btn.textContent = on ? "Queued" : "Add to queue";
+    });
+    const badge = document.getElementById("queue-count");
+    badge.textContent = String(queue.size);
+    badge.hidden = queue.size === 0;
+    store("si-queue", JSON.stringify(Array.from(queue)));
+  }
+  function toggleQueue(id) {
+    if (queue.has(id)) queue.delete(id);
+    else queue.add(id);
+    renderQueue();
+    toast(queue.has(id) ? "Added to the action queue" : "Removed from the queue");
+  }
+
+  function applyKw() {
+    let n = 0;
+    document.querySelectorAll(".kw-row").forEach(function (row) {
+      const okF = kwFilter === "all" || row.dataset.opp === kwFilter || row.dataset.intent === kwFilter;
+      const okQ = row.dataset.q.toLowerCase().indexOf(kwQuery) !== -1;
+      const show = okF && okQ;
+      row.style.display = show ? "" : "none";
+      if (show) n += 1;
+    });
+    document.querySelectorAll(".bubble").forEach(function (b) {
+      const okF = kwFilter === "all" || b.dataset.opp === kwFilter || b.dataset.intent === kwFilter;
+      const okQ = b.dataset.q.toLowerCase().indexOf(kwQuery) !== -1;
+      b.style.display = okF && okQ ? "" : "none";
+    });
+    document.querySelectorAll(".kw-count").forEach(function (el) {
+      el.textContent = n + (n === 1 ? " term in view" : " terms in view");
+    });
+  }
+
+  function sortTable(key) {
+    if (sortState.key === key) sortState.dir *= -1;
+    else sortState = { key: key, dir: key === "q" || key === "intent" ? 1 : -1 };
+    const tbody = document.querySelector("#kw-table tbody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    rows.sort(function (a, b) {
+      let av = a.dataset[key];
+      let bv = b.dataset[key];
+      if (key !== "q" && key !== "intent") {
+        av = parseFloat(av); bv = parseFloat(bv);
+        return (av - bv) * sortState.dir;
+      }
+      return av.localeCompare(bv) * sortState.dir;
+    });
+    rows.forEach(function (r) { tbody.appendChild(r); });
+  }
+
+  function showTip(wrap, bubble, event) {
+    const tip = wrap.querySelector(".tip");
+    if (!tip) return;
+    tip.hidden = false;
+    tip.querySelector("strong").textContent = bubble.dataset.q;
+    tip.querySelector("span").textContent = "Vol " + bubble.dataset.vol + " · Difficulty " + bubble.dataset.diff + " · Opportunity " + bubble.dataset.score;
+    const host = wrap.getBoundingClientRect();
+    const x = Math.min(Math.max(8, event.clientX - host.left + 12), Math.max(8, wrap.clientWidth - 200));
+    const y = Math.max(8, event.clientY - host.top + 12);
+    tip.style.left = x + "px";
+    tip.style.top = y + "px";
+  }
+  function hideTips() {
+    document.querySelectorAll(".tip").forEach(function (t) { t.hidden = true; });
+  }
+
+  function activateSample(stage, idx) {
+    const s = SAMPLES[idx];
+    if (!s) return;
+    stage.querySelectorAll(".q-btn").forEach(function (b) {
+      b.classList.toggle("is-on", b.dataset.sample === String(idx));
+    });
+    stage.querySelector(".answer-text").textContent = s.answer;
+    stage.querySelector(".sources-line").textContent = s.sources;
+    const flags = stage.querySelectorAll(".flag");
+    flags[0].textContent = s.mention ? "Brand mentioned" : "Brand absent";
+    flags[0].classList.toggle("mid", s.mention);
+    flags[1].textContent = s.cite ? "Domain cited" : "Domain not cited";
+    flags[1].classList.toggle("good", s.cite);
+    stage.querySelector(".ln.ab").classList.toggle("on", s.mention);
+    stage.querySelector(".ln.bd").classList.toggle("on", s.mention && !s.cite);
+    stage.querySelector(".ln.cd").classList.toggle("on", s.cite);
+    stage.querySelector(".ln.cd").classList.toggle("lime", s.cite);
+    const domain = stage.querySelector(".n-domain");
+    domain.classList.toggle("is-cited", s.cite);
+    domain.classList.toggle("is-out", !s.mention && !s.cite);
+  }
+
+  function clearFocus() {
+    document.querySelectorAll(".bubble").forEach(function (b) { b.classList.remove("dim", "focus"); });
+    document.querySelectorAll(".signal").forEach(function (s) { s.classList.remove("on"); });
+  }
+
+  function openModal() {
+    document.getElementById("modal").classList.add("show");
+    document.getElementById("analyze-note").textContent = "";
+    document.getElementById("analyze-url").focus();
+  }
+  function closeModal() {
+    document.getElementById("modal").classList.remove("show");
+    runTimers.forEach(clearTimeout);
+    runTimers = [];
+    const go = document.getElementById("analyze-go");
+    go.disabled = false;
+    go.textContent = "Run Analysis";
+  }
+  function normalizeHost(value) {
+    return String(value || "").trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
+  }
+  function startAnalysis() {
+    const host = normalizeHost(document.getElementById("analyze-url").value);
+    const note = document.getElementById("analyze-note");
+    if (host && host !== "revdandatourism.com") {
+      note.textContent = "This build holds one complete reading — revdandatourism.com. It will not invent metrics for " + host + ".";
+      return;
+    }
+    note.textContent = "";
+    const stages = [
+      "Resolving host and sitemap",
+      "Reading indexable URLs",
+      "Comparing query coverage",
+      "Sampling competitor headings",
+      "Reading AI answer citations",
+      "Scoring the action queue"
+    ];
+    const list = document.getElementById("stages");
+    list.hidden = false;
+    list.innerHTML = stages.map(function (s) { return "<li><span>" + s + "</span><i>Wait</i></li>"; }).join("");
+    const go = document.getElementById("analyze-go");
+    go.disabled = true;
+    go.textContent = "Reading…";
+    stages.forEach(function (_, i) {
+      runTimers.push(setTimeout(function () {
+        const item = list.children[i];
+        item.classList.add("done");
+        item.querySelector("i").textContent = "Done";
+        if (i === stages.length - 1) {
+          document.querySelectorAll(".analyzed").forEach(function (el) {
+            el.textContent = "26 Sep 2026 · re-read";
+          });
+          go.disabled = false;
+          go.textContent = "Run Analysis";
+          closeModal();
+          toast("Reading updated for revdandatourism.com");
+          if (location.hash !== "#/overview") location.hash = "#/overview";
+          else showApp("overview");
+        }
+      }, 420 * (i + 1)));
+    });
+  }
+
+  function downloadReport() {
+    const doc = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>SEO Intelligence — Revdanda Tourism — 26 Sep 2026</title><style>body{margin:0;background:#F3F0E8;color:#171A1D;font-family:Georgia,serif;line-height:1.55}main{max-width:760px;margin:0 auto;padding:48px 28px 80px}h1,h2{font-family:Arial,sans-serif;font-weight:500;letter-spacing:-0.03em}h1{font-size:34px;line-height:1.05}h2{font-size:22px;margin-top:32px}.k{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5c656c}table{width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px}td,th{text-align:left;padding:8px 6px;border-bottom:1px solid #d9d3c7}ol,ul{padding-left:18px}</style></head><body><main><p class=\"k\">SEO, INTELLIGENCE · Project reading · 26 Sep 2026</p><h1>Revdanda Tourism</h1><p>revdandatourism.com · Intelligence score 82 / 100 · Confidence 0.86</p><h2>Executive summary</h2><p>Revdanda Tourism is visible for its own name and its fort, and nearly invisible for the demand that moves weekends. The score is 82 because the base is mostly sound — not because the market is won. Competitors publish the journey. This site publishes the place. Archived AI answers mention the coast and rarely cite the domain.</p><h2>SEO health</h2><p>Technical 78 · Content 84 · Authority 71 · AI presence 69 · On-page 91. Organic visibility 64.2. Open issues 17, three critical.</p><h2>Keyword opportunities</h2><ul><li>Murud Janjira fort — opportunity 91, difficulty 22.</li><li>Quiet beaches near Mumbai — opportunity 88. Not in the AI source set.</li><li>Revdanda homestay — difficulty 11, no indexable URL.</li><li>Revdanda beach resorts — opportunity 84.</li><li>Mumbai to Revdanda — partly owned. Extend it.</li></ul><h2>Competitor gaps</h2><p>Alibaug Tourism: 34 missing keywords. Konkan Guide: thin guides, including fort timings. MTDC: institutional links. Beach Escape: commercial stay intent.</p><h2>AI visibility</h2><p>40 prompts. 23 mentions. 5 citations. 17 absent. Mention is not the shelf.</p><h2>Content opportunities</h2><p>Itinerary (96), stay hub (93), four-place comparison (88), quiet-beaches source page (86), Marathi fort query still open.</p><h2>Technical issues</h2><ul><li>Critical: LCP 4.8s, canonical host mismatch on 9 URLs, robots.txt conflicts with the sitemap.</li><li>Warning: stale lastmod, missing metas, duplicate titles, orphan stays, thin ferry FAQ.</li></ul><h2>Recommended actions</h2><ol><li>Repair canonicals and the robots/sitemap conflict.</li><li>Publish the Murud–Revdanda coastal guide.</li><li>Write the quiet-beach page to be cited.</li><li>Open the homestay cluster and connect fort, stays, and food.</li><li>Publish the comparison, then the Marathi page.</li></ol><p class=\"k\">Demonstration dataset · not a live third-party index · not a ranking guarantee.</p></main></body></html>";
+    const blob = new Blob([doc], { type: "text/html" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "SEO-Intelligence-Revdanda-Tourism-26-Sep-2026.html";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1200);
+    toast("Report downloaded");
+  }
+
+  function initClones() {
+    const plot = document.querySelector("#sec-keywords .plot-wrap");
+    const slot = document.getElementById("kw-plot-slot");
+    if (plot && slot && !slot.children.length) slot.appendChild(plot.cloneNode(true));
+    const ai = document.getElementById("ai-stage");
+    const mount = document.getElementById("ai-mount");
+    if (ai && mount && !mount.children.length) {
+      const copy = ai.cloneNode(true);
+      copy.removeAttribute("id");
+      mount.appendChild(copy);
+    }
+  }
+
+  function loadSettings() {
+    const raw = read("si-settings");
+    if (!raw) return;
+    try {
+      const data = JSON.parse(raw);
+      const form = document.getElementById("settings-form");
+      Object.keys(data).forEach(function (k) {
+        const field = form.elements[k];
+        if (!field) return;
+        if (field.type === "checkbox") field.checked = data[k] === "on" || data[k] === true;
+        else field.value = data[k];
+      });
+    } catch (e) {}
+  }
+
+  document.getElementById("imap").addEventListener("mouseover", function (e) {
+    const btn = e.target.closest("[data-node]");
+    const map = document.getElementById("imap");
+    if (!btn) return;
+    const id = btn.dataset.node;
+    map.classList.add("is-hot");
+    map.querySelectorAll(".edge").forEach(function (edge) {
+      edge.classList.toggle("hot", edge.dataset.a === id || edge.dataset.b === id);
+    });
+    map.querySelectorAll(".dot").forEach(function (d, i) {
+      d.classList.toggle("hot", map.querySelectorAll("[data-node]")[i] === btn && !d.classList.contains("subject") && !d.classList.contains("opp"));
+    });
+    map.querySelectorAll(".mlabel").forEach(function (l) { l.classList.toggle("hot", l === btn); });
+    document.getElementById("map-readout").textContent = readouts[id] || readouts.website;
+  });
+  document.getElementById("imap").addEventListener("mouseleave", function () {
+    const map = document.getElementById("imap");
+    map.classList.remove("is-hot");
+    map.querySelectorAll(".edge").forEach(function (e) { e.classList.remove("hot"); });
+    map.querySelectorAll(".mlabel").forEach(function (l) { l.classList.remove("hot"); });
+    document.getElementById("map-readout").textContent = "Five fields. One reading. Hover a node — the product is the relationship, not a rank.";
+  });
+
+  document.body.addEventListener("click", function (e) {
+    if (e.target.closest("[data-open-analyze]")) { openModal(); return; }
+    const chip = e.target.closest(".chip");
+    if (chip) {
+      kwFilter = chip.dataset.filter;
+      document.querySelectorAll(".chip").forEach(function (c) {
+        c.classList.toggle("on", c.dataset.filter === kwFilter);
+      });
+      applyKw();
+      return;
+    }
+    const signal = e.target.closest(".signal");
+    if (signal) {
+      const q = signal.dataset.q;
+      const on = signal.classList.contains("on");
+      clearFocus();
+      if (!on) {
+        signal.classList.add("on");
+        document.querySelectorAll(".bubble").forEach(function (b) {
+          const match = b.dataset.q === q;
+          b.classList.toggle("dim", !match);
+          b.classList.toggle("focus", match);
+        });
+      }
+      return;
+    }
+    const qbtn = e.target.closest(".q-btn");
+    if (qbtn) {
+      activateSample(qbtn.closest(".ai-stage"), qbtn.dataset.sample);
+      return;
+    }
+    const queueBtn = e.target.closest(".queue-btn");
+    if (queueBtn) {
+      toggleQueue(queueBtn.dataset.id);
+      return;
+    }
+    const toggle = e.target.closest(".action-toggle");
+    if (toggle) {
+      const body = toggle.nextElementSibling;
+      const willOpen = body.hasAttribute("hidden");
+      body.toggleAttribute("hidden", !willOpen);
+      toggle.setAttribute("aria-expanded", String(willOpen));
+      toggle.querySelector(".chev").textContent = willOpen ? "Close" : "Open";
+      return;
+    }
+    const gap = e.target.closest(".gap-toggle");
+    if (gap) {
+      const body = gap.nextElementSibling;
+      const willOpen = body.hasAttribute("hidden");
+      body.toggleAttribute("hidden", !willOpen);
+      gap.setAttribute("aria-expanded", String(willOpen));
+      return;
+    }
+    const sug = e.target.closest(".suggest-btn");
+    if (sug) {
+      const map = document.getElementById("linkmap");
+      const id = sug.dataset.link;
+      const already = sug.classList.contains("on");
+      document.querySelectorAll(".suggest-btn").forEach(function (b) { b.classList.remove("on"); });
+      map.classList.remove("is-hot");
+      map.querySelectorAll(".lline.suggest").forEach(function (l) { l.classList.remove("hot"); });
+      if (!already) {
+        sug.classList.add("on");
+        map.classList.add("is-hot");
+        map.querySelectorAll('.lline[data-link="' + id + '"]').forEach(function (l) { l.classList.add("hot"); });
+      }
+      return;
+    }
+    const reportLink = e.target.closest(".report-index a");
+    if (reportLink) {
+      document.querySelectorAll(".report-index a").forEach(function (a) { a.classList.remove("on"); });
+      reportLink.classList.add("on");
+    }
+  });
+
+  document.body.addEventListener("mouseover", function (e) {
+    const bubble = e.target.closest(".bubble");
+    if (!bubble) return;
+    showTip(bubble.closest(".plot-wrap"), bubble, e);
+  });
+  document.body.addEventListener("mousemove", function (e) {
+    const bubble = e.target.closest(".bubble");
+    if (!bubble) return;
+    showTip(bubble.closest(".plot-wrap"), bubble, e);
+  });
+  document.body.addEventListener("mouseout", function (e) {
+    if (e.target.closest && e.target.closest(".bubble")) hideTips();
+  });
+  document.body.addEventListener("focusin", function (e) {
+    const bubble = e.target.closest && e.target.closest(".bubble");
+    if (!bubble) return;
+    const wrap = bubble.closest(".plot-wrap");
+    const rect = bubble.getBoundingClientRect();
+    showTip(wrap, bubble, { clientX: rect.left, clientY: rect.bottom });
+  });
+  document.getElementById("main").addEventListener("scroll", hideTips);
+
+  document.getElementById("kw-table").addEventListener("click", function (e) {
+    const th = e.target.closest("th[data-sort]");
+    if (th) sortTable(th.dataset.sort);
+  });
+  document.getElementById("kw-search").addEventListener("input", function (e) {
+    kwQuery = e.target.value.trim().toLowerCase();
+    applyKw();
+  });
+
+  document.getElementById("menu-btn").addEventListener("click", openNav);
+  document.getElementById("side-close").addEventListener("click", closeNav);
+  document.getElementById("scrim").addEventListener("click", closeNav);
+  document.getElementById("modal-close").addEventListener("click", closeModal);
+  document.getElementById("modal").addEventListener("click", function (e) {
+    if (e.target.id === "modal") closeModal();
+  });
+  document.getElementById("analyze-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    startAnalysis();
+  });
+  document.getElementById("download-report").addEventListener("click", downloadReport);
+  document.getElementById("print-report").addEventListener("click", function () { window.print(); });
+  document.getElementById("settings-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    store("si-settings", JSON.stringify(data));
+    const flag = document.querySelector(".demo-flag");
+    if (flag) flag.style.display = data.flag ? "" : "none";
+    toast("Settings stored in this browser");
+  });
+  document.getElementById("reset-settings").addEventListener("click", function () {
+    store("si-settings", "");
+    try { localStorage.removeItem("si-settings"); } catch (err) {}
+    document.getElementById("settings-form").reset();
+    toast("Settings reset");
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { closeModal(); closeNav(); hideTips(); }
+    const tag = document.activeElement && document.activeElement.tagName;
+    if (e.key === "/" && document.body.classList.contains("app-mode") && tag !== "INPUT" && tag !== "TEXTAREA") {
+      e.preventDefault();
+      if (location.hash !== "#/keywords") location.hash = "#/keywords";
+      else showApp("keywords");
+      setTimeout(function () {
+        const input = document.getElementById("kw-search");
+        if (input) input.focus();
+      }, 40);
+    }
+  });
+  window.addEventListener("hashchange", route);
+
+  initClones();
+  renderQueue();
+  loadSettings();
+  sortTable("score");
+  route();
+})();
+</script>
+</body>
+</html>
